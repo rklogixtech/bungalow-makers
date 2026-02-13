@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Bungalow Makers - House Design Company</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ===== RESET & GLOBAL ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Times New Roman', Times, serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ===== VARIABLES ===== */
+    :root {
+      --bg: #f0f0f0;
+      --text: #111;
+      --hover: rgba(0, 0, 0, 0.05);
+      --primary: #ff0077;
+      --primary-light: #ff6cb0;
+      --dark-blue: rgb(15, 72, 118);
+      --white: #ffffff;
+    }
+
+    body.dark {
+      --bg: #1f1f1f;
+      --text: #fff;
+      --hover: rgba(255, 255, 255, 0.1);
+      --white: #2d2d2d;
+    }
+
+    /* ===== HEADER - FIXED LOGO VISIBILITY ===== */
+    .header {
+      height: 80px;
+      background-color: aliceblue;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px 0 80px; /* Increased left padding for menu button */
+      position: relative;
+      z-index: 100;
+    }
+
+    body.dark .header {
+      background-color: #2d2d2d;
+      color: white;
+    }
+
+    body.dark .menu li a {
+      color: white;
+    }
+
+    .logo img {
+      height: 60px;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .logo img:hover {
+      transform: scale(1.1);
+    }
+
+    /* ===== MENU BUTTON - FIXED POSITION ===== */
+    .menu-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      cursor: pointer;
+      font-size: 24px;
+      color: var(--primary);
+      background: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border: 1px solid #ddd;
+      transition: all 0.3s ease;
+    }
+
+    .menu-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    body.dark .menu-btn {
+      background: #333;
+      color: var(--primary-light);
+      border-color: #555;
+    }
+
+    body.dark .menu-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Menu Desktop */
+    .menu ul {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .menu li a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .menu li a:hover,
+    .menu li a.active {
+      color: var(--primary);
+    }
+
+    .menu li i {
+      margin-right: 8px;
+    }
+
+    /* Hamburger Button */
+    .hamburger {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: black;
+    }
+
+    body.dark .hamburger {
+      color: white;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 280px;
+      height: 100vh;
+      background: var(--white);
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      transition: left 0.3s ease;
+      z-index: 1000;
+      padding: 80px 20px 20px;
+      overflow-y: auto;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar h2 {
+      color: var(--dark-blue);
+      margin: 20px 0 15px;
+      font-size: 20px;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 8px;
+    }
+
+    body.dark .sidebar h2 {
+      color: var(--primary-light);
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .item-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.3s;
+    }
+
+    .item-link:hover {
+      background-color: var(--hover);
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+    }
+
+    .item-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .label:hover {
+      background-color: var(--hover);
+    }
+
+    .switch-box {
+      width: 42px;
+      height: 22px;
+      background: #ccc;
+      border-radius: 50px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .switch-circle {
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .switch-box {
+      background: #666;
+    }
+
+    body.dark .switch-circle {
+      left: 22px;
+    }
+
+    /* ===== SLIDER ===== */
+    .manu-box {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 80px);
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    .small {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 15px 10px;
+      cursor: pointer;
+      font-size: 1.5em;
+      z-index: 10;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-btn.prev {
+      left: 15px;
+    }
+
+    .carousel-btn.next {
+      right: 15px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .dot.active {
+      background: var(--primary);
+      transform: scale(1.2);
+    }
+
+    /* ===== HOME SECTION ===== */
+    .home {
+      display: flex;
+      align-items: flex-start;
+      padding: 50px 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .left {
+      position: relative;
+      width: 45%;
+      min-width: 300px;
+    }
+
+    .left img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .details {
+      position: absolute;
+      bottom: 70px;
+      right: -30px;
+      width: 140px;
+      height: 130px;
+      background: rgba(255, 0, 0, 0.8);
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      font-weight: bold;
+      border: 1px solid #000;
+    }
+
+    .right {
+      width: 55%;
+      padding: 20px 40px;
+    }
+
+    .right h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: var(--dark-blue);
+    }
+
+    body.dark .right h1 {
+      color: var(--primary-light);
+    }
+
+    .right p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #444;
+      text-align: justify;
+    }
+
+    body.dark .right p {
+      color: #ddd;
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-title-wrapper {
+      text-align: center;
+      margin: 60px 0 30px;
+    }
+
+    .one {
+      display: inline-block;
+      font-size: 40px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .two {
+      display: inline-block;
+      color: var(--primary-light);
+      font-size: 30px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .three {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: normal;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin: 30px 7%;
+    }
+
+    .item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      width: 270px;
+    }
+
+    .item:hover {
+      transform: scale(1.02);
+    }
+
+    .item img {
+      width: 270px;
+      height: 320px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .item:hover img {
+      transform: scale(1.1);
+    }
+
+    .info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+    }
+
+    .item:hover .info {
+      opacity: 1;
+    }
+
+    .info h3 {
+      margin-bottom: 5px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    /* ===== CALCULATOR SECTION ===== */
+    .calculatorContainer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .area {
+      border: 1px solid black;
+      background-color: var(--dark-blue);
+      width: 100%;
+      max-width: 500px;
+      border-radius: 20px;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    .areatext {
+      margin-bottom: 30px;
+      font-size: 28px;
+      text-align: center;
+      color: wheat;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .area label {
+      color: rgb(230, 154, 198);
+      font-size: 18px;
+    }
+
+    .area select,
+    .area input[type="number"] {
+      width: 100%;
+      height: 45px;
+      margin-bottom: 20px;
+      border-radius: 30px;
+      text-align: center;
+      font-size: 18px;
+      border: none;
+      padding: 0 15px;
+    }
+
+    .radio {
+      margin-top: 30px;
+      padding: 15px 20px;
+    }
+
+    .radio h3 {
+      margin: 0 0 15px 0;
+      font-size: 20px;
+      color: wheat;
+    }
+
+    .radio input[type="radio"] {
+      margin: 0 10px 0 20px;
+      transform: scale(1.2);
+    }
+
+    .radio label {
+      color: wheat;
+      font-size: 16px;
+    }
+
+    .getstart {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: var(--primary);
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      overflow: hidden;
+      text-decoration: none;
+      margin-top: 20px;
+      margin-left: 70%;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+
+    .getstart:hover {
+      background-color: #d1006b;
+    }
+
+    /* ===== LOAN CALCULATOR ===== */
+    .calculator {
+      background-color: var(--dark-blue);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    #Loan {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: wheat;
+    }
+
+    .input-group {
+      margin-bottom: 25px;
+    }
+
+    .values {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .values label {
+      color: rgb(230, 154, 198);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      cursor: pointer;
+    }
+
+    #h3 {
+      background-color: #2979ff;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    #h3:hover {
+      background-color: #2978ff99;
+      transition: all 0.4s;
+    }
+
+    /* ===== FEATURE GALLERY ===== */
+    .feature-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin: 50px 7%;
+    }
+
+    .feature-item {
+      background: var(--white);
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .feature-img img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-item:hover .feature-img img {
+      transform: scale(1.04);
+    }
+
+    .feature-content {
+      padding: 20px;
+    }
+
+    .feature-content h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .feature-content p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    body.dark .feature-content p {
+      color: #ddd;
+    }
+
+    /* ===== STATS SECTION ===== */
+    .stats-section {
+      background: linear-gradient(135deg, #d32f2f, #b71c1c);
+      padding: 60px 20px;
+      color: white;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 300;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-9px);
+    }
+
+    .stat-number {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    /* ===== CONTACT INFO BOXES ===== */
+    .three-box {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .location, .mail, .contact-three {
+      border: none;
+      border-radius: 10px;
+      padding: 30px 20px;
+      width: 280px;
+      transition: 0.4s all ease;
+    }
+
+    .location:hover, .mail:hover, .contact-three:hover {
+      cursor: pointer;
+      background: #96748434;
+      transform: scale(1.05);
+    }
+
+    .circle {
+      margin-bottom: 20px;
+    }
+
+    .circle img {
+      width: 50px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background-color: var(--dark-blue);
+    }
+
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .contact-box {
+      flex: 1 1 400px;
+      background: rgb(247, 239, 247);
+      padding: 30px;
+      border-radius: 16px;
+    }
+
+    body.dark .contact-box {
+      background: #3d3d3d;
+      color: white;
+    }
+
+    .contact-box h2 {
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-box h2 span {
+      color: #e53935;
+    }
+
+    .contact-box p {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+      color: #555;
+    }
+
+    body.dark .contact-box p {
+      color: #ddd;
+    }
+
+    .contact-box input,
+    .contact-box textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+    }
+
+    .contact-box textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn1 {
+      font-size: 18px;
+      font-weight: bold;
+      width: 200px;
+      height: 50px;
+      background-color: thistle;
+      margin: 20px auto;
+      border: 1px solid rgb(200, 200, 247);
+      border-radius: 60px;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: 0.3s all ease;
+      display: block;
+    }
+
+    .btn1:hover {
+      color: white;
+      background: var(--dark-blue);
+    }
+
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: 0;
+      margin-top: 30px;
+      border-radius: 10px;
+    }
+
+    /* ===== FOOTER BOTTOM ===== */
+    footer {
+      background: var(--dark-blue);
+      padding: 50px 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-section h3 {
+      color: thistle;
+      margin-bottom: 30px;
+      border-bottom: 1px solid;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: thistle;
+      text-decoration: none;
+      font-size: 16px;
+      line-height: 2;
+      transition: 0.2s all ease;
+    }
+
+    .footer-section a:hover {
+      font-weight: bold;
+      color: white;
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 1024px) {
+      .feature-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .right h1 {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 15px 0 70px;
+        height: 70px;
+      }
+
+      .menu-btn {
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+
+      .logo img {
+        height: 45px;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: aliceblue;
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        border-top: 2px solid #ddd;
+        z-index: 99;
+      }
+
+      body.dark .menu {
+        background: #2d2d2d;
+        border-top-color: #555;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu ul {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .home {
+        flex-direction: column;
+        padding: 30px 20px;
+      }
+
+      .left, .right {
+        width: 100%;
+      }
+
+      .details {
+        left: 20px;
+        right: auto;
+        bottom: 20px;
+      }
+
+      .right {
+        padding: 20px 0;
+      }
+
+      .feature-gallery {
+        grid-template-columns: 1fr;
+        margin: 30px 20px;
+      }
+
+      .calculatorContainer {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .getstart {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .three-box {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
+
+      .stat-item:last-child {
+        border-bottom: none;
+      }
+
+      .one {
+        font-size: 32px;
+      }
+
+      .two {
+        font-size: 24px;
+      }
+
+      .three {
+        font-size: 16px;
+        padding: 0 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 0 10px 0 60px;
+        height: 60px;
+      }
+
+      .menu-btn {
+        top: 12px;
+        left: 12px;
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+      }
+
+      .logo img {
+        height: 40px;
+      }
+
+      .gallery {
+        margin: 20px 10px;
+      }
+
+      .item {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .item img {
+        width: 100%;
+      }
+
+      .contact-box {
+        padding: 20px;
+      }
+
+      .btn1 {
+        width: 100%;
+      }
+
+      .one {
+        font-size: 28px;
+      }
+
+      .two {
+        font-size: 22px;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu Button for Sidebar - FIXED: Now visible and not hiding logo -->
+  <div class="menu-btn" id="menuBtn">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+
+  <!-- Sidebar Dashboard -->
+  <div class="sidebar" id="sidebar">
+    <h2>Dashboard</h2>
+    <ul>
+      <li>
+        <a href="#" class="item-link">
+          <span class="item-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="icon" alt="Profile">
+            My Profile
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="item-link">
+          <span class="item-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" class="icon" alt="Notifications">
+            Notifications
+          </span>
+          <span style="color: orange;">3</span>
+        </a>
+      </li>
+      <li>
+        <div class="label" id="darkModeToggle">
+          <span class="item-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" class="icon" alt="Dark Mode">
+            Dark Mode
+          </span>
+          <div class="switch-box" id="modeSwitch">
+            <div class="switch-circle"></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="item-link">
+          <span class="item-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" class="icon" alt="Settings">
+            Settings
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <h2>More Tools</h2>
+    <ul>
+      <li>
+        <a href="#" class="item-link">
+          <span class="item-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" class="icon" alt="Bookmarked">
+            Bookmarked
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="item-link">
+          <span class="item-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/929/929426.png" class="icon" alt="Language">
+            Language
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="item-link">
+          <span class="item-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" class="icon" alt="Help">
+            Help & Support
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="item-link">
+          <span class="item-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" class="icon" alt="Logout">
+            Logout
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Header - FIXED: Added left padding to make room for menu button -->
+  <header class="header">
+    <div class="logo">
+      <img src="logo.webp" alt="Bungalow Makers Logo">
+    </div>
+
+    <div id="hamburger" class="hamburger">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <nav id="menu" class="menu">
+      <ul>
+        <li><a href="#index" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="about.html"><i class="fa-solid fa-info-circle"></i> About</a></li>
+        <li><a href="service.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+        <li><a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a></li>
+        <li><a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Slider/Carousel -->
+  <div class="manu-box">
+    <div class="small" id="slider">
+      <div class="slide">
+        <img src="https://www.bungalowmakers.com/uploads/all/1744197824.jpg" alt="Modern House Design">
+      </div>
+      <div class="slide">
+        <img src="https://www.bungalowmakers.com/uploads/all/1744197823.jpg" alt="Luxury Bungalow">
+      </div>
+      <div class="slide">
+        <img src="https://www.bungalowmakers.com/uploads/all/1744197843.png" alt="Interior Design">
+      </div>
+    </div>
+    <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
+    <button class="carousel-btn next" id="nextBtn">&#10095;</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+
+  <!-- Home Section -->
+  <section id="home" class="home">
+    <div class="left">
+      <img src="https://www.bungalowmakers.com/front/images/about-img.webp" alt="About Bungalow Makers">
+      <div class="details">
+        <div style="font-size: 45px; font-weight: bold;">8+</div>
+        <div style="font-size: 17px; font-weight: bold;">Years of Expertise</div>
+      </div>
+    </div>
+
+    <div class="right">
+      <h1>Best House Design Company in India</h1>
+      <p>
+        Bungalow Makers is the Top Architectural and Interior Design Company for your dream house. With more than 8+ years of expertise in offering all kinds of architectural and interior design services, we are the perfect one-stop solution for all your home design needs. Our expert architect and interior designer team provides customized house design services, including floor plans, 3D elevation designs, structure drawings, working drawings, interior design, landscaping services, and more.
+      </p>
+      <p>
+        Our skilled interior designers and architectural engineers work together to make your dream home into reality. Our expert architect team provides you with trending house designs according to Vastu. Most importantly, we offer high-quality house designs at valuable prices to meet your dream house needs.
+      </p>
+    </div>
+  </section>
+
+  <!-- Trending House By Area -->
+  <div class="section-title-wrapper">
+    <h1 class="one">Trending House By </h1>
+    <h2 class="two">Area</h2>
+  </div>
+  <h5 class="three">The trending house designs are according to the square feet. All types of small and big house designs have been given below for your convenience.</h5>
+
+  <div class="gallery">
+    <div class="item">
+      <img src="https://www.bungalowmakers.com/front/img/recently-properties/trending_house_600_1200.webp" alt="600-1200 sqft House">
+      <div class="info">
+        <h3>Area: 600-1200 sqft</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://www.bungalowmakers.com/front/img/recently-properties/trending_house_1200_1800.webp" alt="1200-1800 sqft House">
+      <div class="info">
+        <h3>Area: 1200-1800 sqft</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://www.bungalowmakers.com/front/img/recently-properties/trending_house_1800_2400.webp" alt="1800-2400 sqft House">
+      <div class="info">
+        <h3>Area: 1800-2400 sqft</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://www.bungalowmakers.com/front/img/recently-properties/trending_house_2400_3000.webp" alt="2400-3000 sqft House">
+      <div class="info">
+        <h3>Area: 2400-3000 sqft</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- House Elevation Designs -->
+  <div class="section-title-wrapper">
+    <h1 class="one">House Elevation</h1>
+    <h2 class="two">Designs</h2>
+  </div>
+  <h5 class="three">Explore the latest trends in house elevation designs, from modern to traditional patterns.</h5>
+
+  <div class="gallery">
+    <div class="item">
+      <img src="https://t3.ftcdn.net/jpg/02/33/59/42/240_F_233594258_81s2Un5DEpmiHYxuOPAUfnrD0T9we5fd.jpg" alt="Modern Elevation">
+      <div class="info">
+        <h3>Modern Elevation</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://t3.ftcdn.net/jpg/03/57/29/78/240_F_357297813_GJReUuH3eNTM7Uy74AD6w3qIwsHqQGYX.jpg" alt="Ultra-modern Elevation">
+      <div class="info">
+        <h3>Ultra-modern Elevation</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://t3.ftcdn.net/jpg/03/15/23/92/240_F_315239239_dGT6rTCvWNd668WQhj0DT4OZlhlpHp5l.jpg" alt="Traditional Elevation">
+      <div class="info">
+        <h3>Traditional Elevation</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://as2.ftcdn.net/v2/jpg/01/62/82/17/1000_F_162821702_V0eylkfwAv0C0GrUQt2zR420Dvz73w7O.jpg" alt="Rajasthan Pattern">
+      <div class="info">
+        <h3>Rajasthan Pattern</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- House Plan -->
+  <div class="section-title-wrapper">
+    <h1 class="one">House</h1>
+    <h2 class="two">Plan</h2>
+  </div>
+  <h5 class="three">Our house plans are designed to meet lifestyle needs and architectural aspirations.</h5>
+
+  <div class="gallery">
+    <div class="item">
+      <img src="https://media.gettyimages.com/id/103400398/photo/woman-dog-sitting-on-the-porch-of-a-quaint-house.jpg?s=612x612&w=0&k=20&c=rECboIyCVI_6MquxsNvYCFnXOh0Cqm0LlNs9MhHAONs=" alt="1 BHK Plan">
+      <div class="info">
+        <h3>1 BHK Plan</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://media.gettyimages.com/id/1516936025/photo/3d-rendering-exterior-of-a-forest-house-on-summer-day.jpg?s=612x612&w=0&k=20&c=KzwngQkVuGe8fuDlfvGveDzKhKkpQMBQCXrM4J6yXmY=" alt="2 BHK Plan">
+      <div class="info">
+        <h3>2 BHK Plan</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://media.gettyimages.com/id/1181650196/photo/modern-residential-houses-in-the-suburb.jpg?s=612x612&w=0&k=20&c=TOD8j7V523aGSE_N5ioWEW-WtqcTSkuktKOBVL3wBXM=" alt="3 BHK Plan">
+      <div class="info">
+        <h3>3 BHK Plan</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://media.gettyimages.com/id/1181649923/photo/luxury-bungalow-in-a-residential-area.jpg?s=612x612&w=0&k=20&c=XG7tU0kOZfw30zd52ymcU39KO4-HdiYuPpm6LrL6ww4=" alt="4 BHK Plan">
+      <div class="info">
+        <h3>4 BHK Plan</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Commercial Designs -->
+  <div class="section-title-wrapper">
+    <h1 class="one">Magnificent Commercial</h1>
+    <h2 class="two">Designs</h2>
+  </div>
+  <h5 class="three">Our Magnificent commercial designs enhance the efficiency of your business.</h5>
+
+  <div class="gallery">
+    <div class="item">
+      <img src="https://px-web-images6.pixpa.com/y9LX_D1ldNhczuAuxelwjKo26lNuwebXHO99DK0Hrh4/rs:fit:1200:0/q:80/aHR0cHM6Ly9waXhwYWNvbS1pbWcucGl4cGEuY29tL2NvbS9hcnRpY2xlcy8xNzM3MDEyOTc4LTI1NjM2NS1yb2JlcnQtZ2FyZXRoLWdlMmZrYmZyNnUtdW5zcGxhc2hqcGcucG5n" alt="Commercial Building">
+      <div class="info">
+        <h3>Office Complex</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://thumbs.dreamstime.com/b/hospital-building-modern-parking-lot-59693686.jpg?w=768" alt="Hospital Design">
+      <div class="info">
+        <h3>Hospital Design</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/99/7a/37/novotel-mumbai-juhu-beach.jpg?w=300&h=300&s=1" alt="Hotel Design">
+      <div class="info">
+        <h3>Hotel Design</h3>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpITuxuvthO8h80uZtj4iuMvqqFoWjbdrZbg&s" alt="Mall Design">
+      <div class="info">
+        <h3>Shopping Mall</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calculators Section -->
+  <div class="calculatorContainer">
+    <!-- Construction Cost Calculator -->
+    <div class="area">
+      <h2 class="areatext">Home Construction Cost Calculator</h2>
+      <form id="costCalculatorForm">
+        <label for="state">State:</label><br>
+        <select id="state" name="state" required>
+          <option value="">-- Select State --</option>
+          <option value="rajasthan">Rajasthan</option>
+          <option value="maharashtra">Maharashtra</option>
+          <option value="uttar_pradesh">Uttar Pradesh</option>
+          <option value="gujarat">Gujarat</option>
+          <option value="delhi">Delhi</option>
+          <option value="punjab">Punjab</option>
+          <option value="haryana">Haryana</option>
+          <option value="karnataka">Karnataka</option>
+          <option value="tamil_nadu">Tamil Nadu</option>
+          <option value="west_bengal">West Bengal</option>
+          <option value="bihar">Bihar</option>
+          <option value="madhya_pradesh">Madhya Pradesh</option>
+          <option value="telangana">Telangana</option>
+          <option value="andhra_pradesh">Andhra Pradesh</option>
+          <option value="odisha">Odisha</option>
+        </select>
+
+        <label for="city">City:</label><br>
+        <select id="city" name="city" required>
+          <option value="">-- Select City --</option>
+        </select>
+
+        <div class="radio">
+          <h3>Area of Construction:</h3>
+          <input type="radio" name="areaUnit" id="sqFeet" value="sqft" checked>
+          <label for="sqFeet">Sq Feet</label>
+          <input type="radio" name="areaUnit" id="sqMeter" value="sqm">
+          <label for="sqMeter">Sq Meter</label>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <label for="areaSize">Area Size:</label>
+          <input type="number" id="areaSize" placeholder="Enter area size" min="100">
+        </div>
+
+        <button type="button" class="getstart" onclick="calculateCost()"><span>Calculate</span></button>
+      </form>
+    </div>
+
+    <!-- Loan Calculator -->
+    <div class="calculator">
+      <h2 id="Loan">Loan Calculator 📊</h2>
+      
+      <div class="input-group">
+        <div class="values">
+          <label>Loan Amount:</label>
+          <span>₹<span id="loanAmountValue">5,00,000</span></span>
+        </div>
+        <input type="range" id="loanAmount" min="50000" max="10000000" value="500000" step="10000" oninput="calculateEMI()">
+      </div>
+
+      <div class="input-group">
+        <div class="values">
+          <label>Tenure (Years):</label>
+          <span id="tenureValue">5</span>
+        </div>
+        <input type="range" id="tenure" min="1" max="30" value="5" oninput="calculateEMI()">
+      </div>
+
+      <div class="input-group">
+        <div class="values">
+          <label>Interest Rate (%):</label>
+          <span id="interestRateValue">8.5</span>
+        </div>
+        <input type="range" id="interestRate" min="5" max="20" step="0.1" value="8.5" oninput="calculateEMI()">
+      </div>
+      <h3 id="h3">Monthly EMI: ₹<span id="emiResult">4,261</span></h3>
+    </div>
+  </div>
+
+  <!-- Services/Features Section -->
+  <div class="section-title-wrapper">
+    <h1 class="one">We offer a full range of services under one</h1>
+    <h2 class="two">roof</h2>
+  </div>
+
+  <div class="feature-gallery">
+    <div class="feature-item">
+      <div class="feature-img">
+        <img src="https://media.istockphoto.com/id/2187851521/photo/modern-living-room-design-with-open-dining-area-digitally-generated.webp?a=1&b=1&s=612x612&w=0&k=20&c=3KyOct_y7GaCAe70q85wiuIuL79h310f5oJbWNNBuUA=" alt="Customised Design">
+      </div>
+      <div class="feature-content">
+        <h3>Customised Design</h3>
+        <p>Additionally, we create outstanding bespoke house plans. With more than 8+ years of experience, the Architect's Team has created homes for clients all around the world.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-img">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGx1eHVyeSUyMGhvdXNlfGVufDB8fDB8fHww" alt="Saving Time">
+      </div>
+      <div class="feature-content">
+        <h3>Saving Time</h3>
+        <p>Time-saving house plans are available. A proper design that can bring comfort, satisfaction, and a high level of life can be found with less time spent planning.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-img">
+        <img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGx1eHVyeSUyMGhvdXNlfGVufDB8fDB8fHww" alt="High-Quality Drawings">
+      </div>
+      <div class="feature-content">
+        <h3>High-Quality Drawings</h3>
+        <p>High aesthetic quality in a piece of art, team review of all drawings, yet it is still significant.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-img">
+        <img src="https://media.istockphoto.com/id/2169113624/photo/classic-living-room-interior-architecture.webp?a=1&b=1&s=612x612&w=0&k=20&c=g7INfBwgdRCkqUgyubBKEqxKzDFBasOiAtxvqOwVPPc=" alt="Affordable Price">
+      </div>
+      <div class="feature-content">
+        <h3>Affordable Price</h3>
+        <p>Building can be done for a reasonable price using tested, high-quality, value-engineered house plans.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-img">
+        <img src="https://media.istockphoto.com/id/1560745213/photo/modern-mediterranean-villa-with-pool.jpg?s=612x612&w=0&k=20&c=HBAi3bI-Fz-Stfq_eAC0DX2ifcNBBfk7Sr2MjxusZGc=" alt="Budget Friendly">
+      </div>
+      <div class="feature-content">
+        <h3>Budget Friendly</h3>
+        <p>It would be less expensive with quality when you compare it with a special Architect.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-img">
+        <img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGx1eHVyeSUyMGhvdXNlfGVufDB8fDB8fHww" alt="No Engineer Visit">
+      </div>
+      <div class="feature-content">
+        <h3>No Engineer Visit Needed</h3>
+        <p>Online connectivity up until construction, accurate drawings that have been verified three times.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="stats-section">
+    <div class="container">
+      <h2 class="section-title">The numbers speak for themselves</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">7000+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">7000+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1500+</div>
+          <div class="stat-label">Commercial Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">35K+</div>
+          <div class="stat-label">Followers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Info Boxes -->
+  <div class="three-box">
+    <div class="location">
+      <div class="circle">
+        <img src="https://images.icon-icons.com/1993/PNG/512/direction_gps_location_map_maps_navigation_pin_icon_123198.png" width="50px" alt="Location">
+      </div>
+      <p><strong>Location</strong><br>Udaipur, Rajasthan</p>
+    </div>
+
+    <div class="mail">
+      <div class="circle">
+        <img src="https://images.icon-icons.com/1826/PNG/512/4202011emailgmaillogomailsocialsocialmedia-115677_115624.png" width="50px" alt="Email">
+      </div>
+      <p><strong>Mail</strong><br>Rajkumawatraz@gmail.com</p>
+    </div>
+
+    <div class="contact-three">
+      <div class="circle">
+        <img src="https://images.icon-icons.com/494/PNG/512/phone-handset_icon-icons.com_48252.png" width="50px" alt="Phone">
+      </div>
+      <p><strong>Contact</strong><br>+91-87648-41243</p>
+    </div>
+  </div>
+
+  <!-- Footer / Contact Section -->
+  <footer id="contact">
+    <div class="contact-container">
+      <div class="contact-box">
+        <h2>Contact <span>Us</span></h2>
+        <p>Udaipur, Rajasthan</p>
+        <input type="text" placeholder="Full Name*" required>
+        <input type="email" placeholder="Email Id*" required>
+        <input type="tel" placeholder="Contact Number*" required>
+        <input type="text" placeholder="Address*" required>
+        <textarea placeholder="Requirement"></textarea>
+        <button class="btn1">Submit</button>
+      </div>
+      <div class="contact-box">
+        <iframe src="https://www.google.com/maps?q=Udaipur,Rajasthan&output=embed" style="border:0; height: 400px;" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About Bungalow Makers</h3>
+          <p>Bungalow Makers: Embark on a journey of excellence in Commercial and Residential 3D Elevation and Interior Designs. Read more...</p>
+        </div>
+        <div class="footer-section">
+          <h3>Information</h3>
+          <p><a href="about.html">About Us</a></p>
+          <p><a href="services.html">Services</a></p>
+          <p><a href="gallery.html">Design Gallery</a></p>
+          <p><a href="contact.html">Support</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="404.html">Floor Plans</a></p>
+          <p><a href="gallery.html">3D Exterior Design</a></p>
+          <p><a href="gallery.html">Interior Design</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <p>📞 +91-87648-41243</p>
+          <p>📧 Rajkumawatraz@gmail.com</p>
+          <p>📍 Udaipur, Rajasthan</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ==================== JAVASCRIPT ====================
+    
+    // ----- Header Mobile Menu Toggle -----
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+
+    if (hamburger) {
+      hamburger.addEventListener('click', function() {
+        menu.classList.toggle('active');
+      });
+    }
+
+    // ----- Sidebar Toggle - FIXED: Now properly opens/closes -----
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+
+    if (menuBtn) {
+      menuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.toggle('open');
+      });
+    }
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', function(e) {
+      if (sidebar && menuBtn) {
+        if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+
+    // ----- Dark Mode Toggle -----
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+      
+      // Save preference to localStorage
+      if (document.body.classList.contains('dark')) {
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    }
+
+    if (darkModeToggle) {
+      darkModeToggle.addEventListener('click', toggleDarkMode);
+    }
+
+    // Check for saved dark mode preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark');
+    }
+
+    // ----- Image Slider/Carousel -----
+    const slider = document.getElementById('slider');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('carouselDots');
+    const slides = document.querySelectorAll('.slide');
+    
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    // Create dots
+    if (dotsContainer) {
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dot.dataset.index = i;
+        dot.addEventListener('click', function() {
+          goToSlide(parseInt(this.dataset.index));
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function updateDots() {
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, index) => {
+        if (index === currentSlide) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function goToSlide(index) {
+      if (index < 0) index = totalSlides - 1;
+      if (index >= totalSlides) index = 0;
+      currentSlide = index;
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      updateDots();
+    }
+
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+    // Auto slide
+    let slideInterval = setInterval(nextSlide, 5000);
+
+    // Pause auto slide on hover
+    const sliderContainer = document.querySelector('.manu-box');
+    if (sliderContainer) {
+      sliderContainer.addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
+      });
+      sliderContainer.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(nextSlide, 5000);
+      });
+    }
+
+    // Initialize dots
+    updateDots();
+
+    // ----- Loan Calculator -----
+    function calculateEMI() {
+      const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+      const tenure = parseFloat(document.getElementById('tenure').value);
+      const interestRate = parseFloat(document.getElementById('interestRate').value);
+
+      // Format loan amount
+      document.getElementById('loanAmountValue').innerHTML = loanAmount.toLocaleString('en-IN');
+      document.getElementById('tenureValue').innerHTML = tenure;
+      document.getElementById('interestRateValue').innerHTML = interestRate;
+
+      // Calculate EMI
+      const principal = loanAmount;
+      const monthlyRate = interestRate / 12 / 100;
+      const months = tenure * 12;
+
+      if (principal > 0 && monthlyRate > 0 && months > 0) {
+        const emi = principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+        document.getElementById('emiResult').innerHTML = Math.round(emi).toLocaleString('en-IN');
+      } else {
+        document.getElementById('emiResult').innerHTML = '0';
+      }
+    }
+
+    // Initialize loan calculator
+    if (document.getElementById('loanAmount')) {
+      calculateEMI();
+    }
+
+    // ----- City Dropdown for State Selection -----
+    const stateSelect = document.getElementById('state');
+    const citySelect = document.getElementById('city');
+
+    const citiesByState = {
+      rajasthan: ['Jaipur', 'Udaipur', 'Jodhpur', 'Kota', 'Ajmer'],
+      maharashtra: ['Mumbai', 'Pune', 'Nagpur', 'Nashik', 'Aurangabad'],
+      uttar_pradesh: ['Lucknow', 'Kanpur', 'Agra', 'Varanasi', 'Allahabad'],
+      gujarat: ['Ahmedabad', 'Surat', 'Vadodara', 'Rajkot', 'Gandhinagar'],
+      delhi: ['New Delhi', 'South Delhi', 'North Delhi', 'East Delhi', 'West Delhi'],
+      punjab: ['Ludhiana', 'Amritsar', 'Jalandhar', 'Patiala', 'Mohali'],
+      haryana: ['Gurugram', 'Faridabad', 'Panipat', 'Ambala', 'Hisar'],
+      karnataka: ['Bangalore', 'Mysore', 'Mangalore', 'Hubli', 'Belgaum'],
+      tamil_nadu: ['Chennai', 'Coimbatore', 'Madurai', 'Trichy', 'Salem'],
+      west_bengal: ['Kolkata', 'Howrah', 'Durgapur', 'Siliguri', 'Asansol'],
+      bihar: ['Patna', 'Gaya', 'Bhagalpur', 'Muzaffarpur', 'Bihar Sharif'],
+      madhya_pradesh: ['Indore', 'Bhopal', 'Gwalior', 'Jabalpur', 'Ujjain'],
+      telangana: ['Hyderabad', 'Warangal', 'Nizamabad', 'Karimnagar', 'Khammam'],
+      andhra_pradesh: ['Visakhapatnam', 'Vijayawada', 'Guntur', 'Nellore', 'Kurnool'],
+      odisha: ['Bhubaneswar', 'Cuttack', 'Rourkela', 'Berhampur', 'Sambalpur']
+    };
+
+    function updateCities() {
+      const selectedState = stateSelect.value;
+      citySelect.innerHTML = '<option value="">-- Select City --</option>';
+      
+      if (selectedState && citiesByState[selectedState]) {
+        citiesByState[selectedState].forEach(city => {
+          const option = document.createElement('option');
+          option.value = city.toLowerCase();
+          option.textContent = city;
+          citySelect.appendChild(option);
+        });
+      }
+    }
+
+    if (stateSelect) {
+      stateSelect.addEventListener('change', updateCities);
+    }
+
+    // ----- Cost Calculator -----
+    window.calculateCost = function() {
+      const state = document.getElementById('state').value;
+      const city = document.getElementById('city').value;
+      const areaSize = document.getElementById('areaSize')?.value;
+      const areaUnit = document.querySelector('input[name="areaUnit"]:checked')?.value;
+      
+      if (!state || !city || !areaSize) {
+        alert('Please fill all fields');
+        return;
+      }
+      
+      alert(`Construction cost calculator: Coming soon! \nState: ${state}\nCity: ${city}\nArea: ${areaSize} ${areaUnit}`);
+    };
+
+    // ----- Active Menu Link on Scroll -----
+    const sections = document.querySelectorAll('section[id]');
+    
+    function highlightActiveMenu() {
+      const scrollY = window.pageYOffset;
+      
+      sections.forEach(section => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 100;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          document.querySelectorAll('.menu a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    window.addEventListener('scroll', highlightActiveMenu);
+  </script>
+</body>
+</html>

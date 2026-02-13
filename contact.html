@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Contact Us - Bungalow Makers | Get Free Consultation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        /* ===== RESET & GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ===== VARIABLES ===== */
+        :root {
+            --bg: #f0f0f0;
+            --text: #111;
+            --hover: rgba(0, 0, 0, 0.05);
+            --primary: #ff0077;
+            --primary-light: #ff6cb0;
+            --red: #d32f2f;
+            --red-dark: #b71c1c;
+            --dark-blue: rgb(15, 72, 118);
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray: #555;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 40px rgba(255,0,119,0.15);
+        }
+
+        body.dark {
+            --bg: #1f1f1f;
+            --text: #fff;
+            --hover: rgba(255, 255, 255, 0.1);
+            --white: #2d2d2d;
+            --gray-light: #3d3d3d;
+            --gray: #ddd;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            height: 80px;
+            background-color: aliceblue;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px 0 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        body.dark .header {
+            background-color: #2d2d2d;
+            color: white;
+        }
+
+        body.dark .menu li a {
+            color: white;
+        }
+
+        .logo img {
+            height: 60px;
+            transition: transform 0.4s ease;
+            display: block;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        /* ===== MENU BUTTON ===== */
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--primary);
+            background: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        body.dark .menu-btn {
+            background: #333;
+            color: var(--primary-light);
+            border-color: #555;
+        }
+
+        body.dark .menu-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== DESKTOP MENU ===== */
+        .menu ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s;
+            padding-bottom: 5px;
+        }
+
+        .menu li a:hover,
+        .menu li a.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .menu li i {
+            margin-right: 8px;
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: black;
+        }
+
+        body.dark .hamburger {
+            color: white;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar h2 {
+            color: var(--dark-blue);
+            margin: 20px 0 15px;
+            font-size: 20px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 8px;
+        }
+
+        body.dark .sidebar h2 {
+            color: var(--primary-light);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .item-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            transition: background 0.3s;
+        }
+
+        .item-link:hover {
+            background-color: var(--hover);
+        }
+
+        .item-left i {
+            width: 20px;
+            margin-right: 12px;
+            color: var(--primary);
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .item-left {
+            display: flex;
+            align-items: center;
+        }
+
+        /* ===== DARK MODE SWITCH ===== */
+        .label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .label:hover {
+            background-color: var(--hover);
+        }
+
+        .switch-box {
+            width: 42px;
+            height: 22px;
+            background: #ccc;
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .switch-circle {
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .switch-box {
+            background: #666;
+        }
+
+        body.dark .switch-circle {
+            left: 22px;
+        }
+
+        /* ===== CONTACT HERO ===== */
+        .contact-hero {
+            background: linear-gradient(135deg, #0f4876 0%, #1a1a2e 100%);
+            padding: 100px 0 80px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M500,97C299,97,299,0,0,0v100h1000V0C701,0,701,97,500,97z" fill="%23ffffff"/></svg>');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: 100% 50px;
+        }
+
+        .contact-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contact-hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .contact-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        /* ===== CONTACT INFO SECTION ===== */
+        .contact-info-section h2 {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact-info-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .contact-info-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .contact-info-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .contact-icon {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-item:hover .contact-icon {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, var(--primary), #ff4da6);
+        }
+
+        .contact-info-item h3 {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .contact-info-item p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .whatsapp-number {
+            color: #25D366 !important;
+            font-weight: bold;
+        }
+
+        /* ===== SOCIAL SECTION ===== */
+        .social-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        body.dark .social-section {
+            border-top-color: rgba(255,255,255,0.1);
+        }
+
+        .social-section h3 {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: linear-gradient(135deg, var(--primary), #ff4da6);
+            box-shadow: 0 10px 20px rgba(255, 0, 119, 0.3);
+        }
+
+        /* ===== CONTACT FORM SECTION ===== */
+        .contact-form-section {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .contact-form-section h2 {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 2rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact-form-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        /* ===== FORM GROUP - Floating Labels ===== */
+        .form-group {
+            position: relative;
+            margin-bottom: 35px;
+            width: 100%;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            font-size: 16px;
+            padding: 15px 15px 10px 5px;
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #757575;
+            outline: none;
+            background: transparent;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+            max-height: 200px;
+            line-height: 1.5;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ff0077' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+
+        .form-group label {
+            color: var(--primary);
+            font-size: 16px;
+            font-weight: normal;
+            position: absolute;
+            pointer-events: none;
+            left: 5px;
+            top: 15px;
+            transition: 0.3s ease all;
+            background: transparent;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .form-group input:focus ~ label,
+        .form-group input:valid ~ label,
+        .form-group textarea:focus ~ label,
+        .form-group textarea:valid ~ label,
+        .form-group select:focus ~ label,
+        .form-group select:valid ~ label {
+            top: -10px;
+            font-size: 14px;
+            color: #ff6cb0;
+            font-weight: bold;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        /* ===== CHECKBOX ===== */
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 25px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+            border-bottom: none;
+            padding: 0;
+        }
+
+        .checkbox span {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .checkbox span a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .checkbox span a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== SUBMIT BUTTON ===== */
+        .submit-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--primary), #ff4da6);
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(255, 0, 119, 0.3);
+        }
+
+        .submit-btn i {
+            margin-right: 8px;
+            transition: transform 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 0, 119, 0.4);
+        }
+
+        .submit-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-message {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            animation: slideIn 0.5s ease;
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .success-message h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== ERROR MESSAGE ===== */
+        .error-message {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            animation: slideIn 0.5s ease;
+        }
+
+        /* ===== MAP SECTION ===== */
+        .map-section {
+            margin: 60px 0;
+        }
+
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .map-container:hover {
+            transform: scale(1.01);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* ===== FAQ SECTION ===== */
+        .faq-section {
+            margin: 60px 0;
+        }
+
+        .heading-contact {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .heading-contact h2 {
+            font-size: 2.2rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .heading-contact h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        body.dark .faq-item {
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px;
+            background: var(--white);
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+            color: var(--text);
+        }
+
+        .faq-question:hover {
+            background: var(--gray-light);
+        }
+
+        .faq-question i {
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: var(--gray-light);
+        }
+
+        .faq-answer p {
+            padding: 20px 0;
+            margin: 0;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .contact-cta {
+            background: linear-gradient(135deg, var(--primary), var(--red));
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 20px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            animation: shimmer 6s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-phone {
+            font-size: 2rem;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+
+        .cta-phone a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .cta-phone a:hover {
+            text-decoration: underline;
+            transform: scale(1.1);
+        }
+
+        .cta-note {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        /* ===== THREE BOX CONTACT ===== */
+        .three-box {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            text-align: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .location, .mail, .contact-three {
+            border: none;
+            border-radius: 10px;
+            padding: 30px 20px;
+            width: 280px;
+            transition: 0.4s all ease;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .location:hover, .mail:hover, .contact-three:hover {
+            cursor: pointer;
+            background: var(--primary);
+            transform: scale(1.05);
+            color: white;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .location:hover p, .mail:hover p, .contact-three:hover p {
+            color: white;
+        }
+
+        .circle {
+            margin-bottom: 20px;
+        }
+
+        .circle i {
+            font-size: 50px;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .location:hover .circle i,
+        .mail:hover .circle i,
+        .contact-three:hover .circle i {
+            color: white;
+            transform: scale(1.2);
+        }
+
+        .three-box p {
+            color: var(--gray);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .three-box p strong {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .location:hover p strong,
+        .mail:hover p strong,
+        .contact-three:hover p strong {
+            color: white;
+        }
+
+        .whatsapp-icon {
+            color: #25D366;
+            margin-right: 5px;
+        }
+
+        .location:hover .whatsapp-icon,
+        .mail:hover .whatsapp-icon,
+        .contact-three:hover .whatsapp-icon {
+            color: white;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark-blue);
+            padding: 50px 20px;
+            color: white;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            color: thistle;
+            margin-bottom: 30px;
+            border-bottom: 1px solid;
+            display: inline-block;
+            padding-bottom: 5px;
+            font-size: 1.3rem;
+        }
+
+        .footer-section h3 i {
+            margin-right: 8px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: thistle;
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 2;
+            transition: 0.2s all ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            font-weight: bold;
+            padding-left: 5px;
+        }
+
+        .footer-section i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .contact-hero-content h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 15px 0 70px;
+                height: 70px;
+            }
+
+            .menu-btn {
+                top: 15px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .logo img {
+                height: 45px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .menu {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background: aliceblue;
+                width: 100%;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                border-top: 2px solid #ddd;
+                z-index: 99;
+            }
+
+            body.dark .menu {
+                background: #2d2d2d;
+                border-top-color: #555;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu ul {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu li a {
+                display: block;
+                padding: 10px;
+            }
+
+            .contact-hero {
+                padding: 80px 0 60px;
+                margin-top: 70px;
+            }
+
+            .contact-hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .contact-hero-content p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .contact-main {
+                padding: 30px 15px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .form-row .form-group {
+                margin-bottom: 0;
+            }
+
+            .contact-form-section {
+                padding: 20px;
+            }
+
+            .contact-info-item {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .contact-info-item h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .heading-contact h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .faq-question {
+                padding: 15px;
+                font-size: 15px;
+            }
+
+            .contact-cta {
+                padding: 40px 20px;
+            }
+
+            .cta-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-phone {
+                font-size: 1.6rem;
+            }
+
+            .three-box {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .location, .mail, .contact-three {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-section h3 {
+                display: block;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 10px 0 60px;
+                height: 60px;
+            }
+
+            .menu-btn {
+                top: 12px;
+                left: 12px;
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            .contact-hero {
+                margin-top: 60px;
+                padding: 60px 0 40px;
+            }
+
+            .contact-hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .contact-hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .contact-form-section h2,
+            .contact-info-section h2,
+            .heading-contact h2 {
+                font-size: 1.6rem;
+            }
+
+            .circle i {
+                font-size: 40px;
+            }
+
+            .three-box p {
+                font-size: 1rem;
+            }
+
+            .three-box p strong {
+                font-size: 1.1rem;
+            }
+
+            .cta-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .cta-phone {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Button for Sidebar -->
+    <div class="menu-btn" id="menuBtn">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <!-- Sidebar Dashboard -->
+    <div class="sidebar" id="sidebar">
+        <h2><i class="fa-solid fa-chart-line"></i> Dashboard</h2>
+        <ul>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-user"></i>
+                        My Profile
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-bell"></i>
+                        Notifications
+                    </span>
+                    <span style="color: orange;">3</span>
+                </a>
+            </li>
+            <li>
+                <div class="label" id="darkModeToggle">
+                    <span class="item-left">
+                        <i class="fa-solid fa-moon"></i>
+                        Dark Mode
+                    </span>
+                    <div class="switch-box" id="modeSwitch">
+                        <div class="switch-circle"></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <h2><i class="fa-solid fa-toolbox"></i> More Tools</h2>
+        <ul>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-bookmark"></i>
+                        Bookmarked
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-language"></i>
+                        Language
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-circle-question"></i>
+                        Help & Support
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="home.html">
+                <img src="https://via.placeholder.com/200x60?text=BUNGALOW+MAKERS" alt="Bungalow Makers Logo">
+            </a>
+        </div>
+        <div id="hamburger" class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <nav id="menu" class="menu">
+            <ul>
+        <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="about.html"><i class="fa-solid fa-info-circle"></i> About</a></li>
+        <li><a href="service.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+        <li><a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a></li>
+        <li><a href="#contact"><i class="fa-solid fa-phone"></i> Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="contact-hero-content">
+            <h1><i class="fa-solid fa-phone-alt"></i> Get in Touch</h1>
+            <p>Let's discuss your dream home project with our expert team</p>
+        </div>
+    </section>
+
+    <!-- Main Contact Content -->
+    <main class="contact-main">
+        <div class="contact-container">
+            <!-- Contact Info - UPDATED with rklogixtect@gmail.com -->
+            <div class="contact-info-section">
+                <h2><i class="fa-solid fa-address-card"></i> Contact Information</h2>
+                <div class="contact-info-grid">
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h3>Our Office</h3>
+                            <p>Udaipur, Rajasthan<br>India 313001</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3>Phone Number</h3>
+                            <p><i class="fa-solid fa-phone"></i> +91-87648-41243</p>
+                            <p><i class="fa-brands fa-whatsapp whatsapp-icon"></i> <span class="whatsapp-number">+91-87648-41243</span></p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>Email Address</h3>
+                            <p><strong style="color: var(--primary);">rklogixtect@gmail.com</strong></p>
+                            <p style="font-size: 0.9rem;">(Main Contact)</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3>Working Hours</h3>
+                            <p>Monday - Saturday: 9:00 AM - 7:00 PM</p>
+                            <p>Sunday: 10:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media -->
+                <div class="social-section">
+                    <h3><i class="fa-solid fa-share-nodes"></i> Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form - EmailJS Integrated -->
+            <div class="contact-form-section">
+                <h2><i class="fa-solid fa-paper-plane"></i> Send Your Inquiry</h2>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required>
+                            <label for="name">Full Name *</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email Address *</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" required>
+                            <label for="phone">Phone Number *</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="city" name="city" required>
+                            <label for="city">City *</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select id="service" name="service" required>
+                            <option value="" disabled selected>Select Service</option>
+                            <option value="Residential Design">🏠 Residential Design</option>
+                            <option value="Commercial Design">🏢 Commercial Design</option>
+                            <option value="Interior Design">🛋️ Interior Design</option>
+                            <option value="3D Elevation">🏗️ 3D Elevation</option>
+                            <option value="Consultation">📋 Consultation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                        <label for="message">Project Requirements *</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <span>I agree to receive updates and promotional offers via email/WhatsApp</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="heading-contact">
+                <h2><i class="fa-solid fa-map"></i> Find Us Here</h2>
+            </div>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3629.522257722171!2d73.6804724!3d24.5239455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3967e9b4a8b9b8b7%3A0x8b8b8b8b8b8b8b8b!2sUdaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="heading-contact">
+                <h2><i class="fa-solid fa-circle-question"></i> Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How long does it take to complete a house design?
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Typically, a complete house design package takes 3-4 weeks for initial designs and 6-8 weeks for detailed working drawings, depending on the complexity and size of the project.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Do you provide site visits?
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we provide site visits for projects within our service areas. For distant locations, we offer remote consultation and local engineer coordination. Contact us at rklogixtect@gmail.com for details.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What information do you need to start a project?
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We need plot dimensions, your requirements (rooms, floors, etc.), budget, preferred style, and any specific needs. A site survey can be arranged if needed. Email us at rklogixtect@gmail.com</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Do you handle government approvals?
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We provide all necessary drawings and documentation for approvals. We can also assist with the approval process in most cities. Call us at +91-87648-41243 for more information.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="contact-cta">
+            <div class="cta-content">
+                <h2><i class="fa-solid fa-headset"></i> Have More Questions?</h2>
+                <p>Call us directly for immediate assistance</p>
+                <div class="cta-phone">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <a href="tel:+918764841243">+91-87648-41243</a>
+                </div>
+                <p class="cta-note">📧 Or email us at: <strong>rklogixtect@gmail.com</strong></p>
+                <p class="cta-note">Available 9:00 AM - 7:00 PM, Monday to Saturday</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Contact Info Boxes with UPDATED DETAILS -->
+    <div class="three-box">
+        <div class="location">
+            <div class="circle">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <p><strong>Location</strong><br>Udaipur, Rajasthan</p>
+        </div>
+
+        <div class="mail">
+            <div class="circle">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <p><strong>Email</strong><br>rklogixtect@gmail.com</p>
+        </div>
+
+        <div class="contact-three">
+            <div class="circle">
+                <i class="fa-solid fa-phone"></i>
+            </div>
+            <p><strong>Contact</strong><br>
+                <i class="fa-solid fa-phone"></i> +91 87648 41243<br>
+                <i class="fa-brands fa-whatsapp whatsapp-icon"></i> +91 87648 41243
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer with UPDATED DETAILS -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-house"></i> About Bungalow Makers</h3>
+                    <p>Bungalow Makers: Embark on a journey of excellence in Commercial and Residential 3D Elevation and Interior Designs. Read more...</p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-info-circle"></i> Information</h3>
+                    <p><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Us</a></p>
+                    <p><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Services</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> Design Gallery</a></p>
+                    <p><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Support</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-link"></i> Quick Links</h3>
+                    <p><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Floor Plans</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> 3D Exterior Design</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> Interior Design</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-address-card"></i> Contact Info</h3>
+                    <p><i class="fa-solid fa-phone"></i> +91-87648-41243</p>
+                    <p><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> +91-87648-41243</p>
+                    <p><i class="fa-solid fa-envelope"></i> rklogixtect@gmail.com</p>
+                    <p><i class="fa-solid fa-map-pin"></i> Udaipur, Rajasthan</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="color: thistle;">© 2024 Bungalow Makers. All rights reserved. | Designed with <i class="fa-solid fa-heart" style="color: #ff0077;"></i> in Udaipur</p>
+                <p style="color: thistle; margin-top: 10px;">📧 For inquiries: <strong style="color: white;">rklogixtect@gmail.com</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== EMAILJS INTEGRATION ====================
+        
+        // Initialize EmailJS with your Public Key
+        (function() {
+            emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // 🔴 REPLACE WITH YOUR ACTUAL PUBLIC KEY
+        })();
+
+        // Get form element
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Form submission handler
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                submitBtn.classList.add('loading');
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+                
+                // Get form data
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const city = document.getElementById('city').value;
+                const service = document.getElementById('service').value;
+                const message = document.getElementById('message').value;
+                
+                // Prepare email parameters
+                const templateParams = {
+                    to_email: 'rklogixtect@gmail.com',     // Your email where inquiries will be sent
+                    from_name: name,
+                    from_email: email,
+                    phone: phone,
+                    city: city,
+                    service: service,
+                    message: message,
+                    reply_to: email,
+                    site_url: window.location.href
+                };
+
+                // Send email using EmailJS
+                // 🔴 REPLACE WITH YOUR ACTUAL SERVICE ID AND TEMPLATE ID
+                emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                    .then(function(response) {
+                        console.log('SUCCESS!', response.status, response.text);
+                        
+                        // Show success message
+                        showSuccessMessage();
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Reset button
+                        submitBtn.classList.remove('loading');
+                        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+                    })
+                    .catch(function(error) {
+                        console.log('FAILED...', error);
+                        
+                        // Show error message
+                        showErrorMessage();
+                        
+                        // Reset button
+                        submitBtn.classList.remove('loading');
+                        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+                    });
+            });
+        }
+
+        // Success message function
+        function showSuccessMessage() {
+            // Remove any existing message
+            const existingMessage = document.querySelector('.success-message');
+            if (existingMessage) existingMessage.remove();
+            
+            // Create success message
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.innerHTML = `
+                <h3><i class="fa-solid fa-circle-check"></i> Message Sent Successfully!</h3>
+                <p>Thank you for contacting Bungalow Makers. Your inquiry has been sent to <strong>rklogixtect@gmail.com</strong></p>
+                <p>Our team will get back to you within 24 hours.</p>
+                <p style="margin-top: 10px;"><i class="fa-solid fa-phone"></i> For immediate assistance: <strong>+91-87648-41243</strong></p>
+                <p><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> WhatsApp us on the same number</p>
+            `;
+            
+            // Insert message after form
+            contactForm.parentNode.insertBefore(successDiv, contactForm.nextSibling);
+            
+            // Auto remove after 8 seconds
+            setTimeout(() => {
+                successDiv.style.opacity = '0';
+                setTimeout(() => {
+                    successDiv.remove();
+                }, 500);
+            }, 8000);
+            
+            // Scroll to success message
+            successDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Error message function
+        function showErrorMessage() {
+            // Remove any existing error message
+            const existingError = document.querySelector('.error-message');
+            if (existingError) existingError.remove();
+            
+            // Create error message
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `
+                <h3><i class="fa-solid fa-circle-exclamation"></i> Oops! Something went wrong.</h3>
+                <p>We couldn't send your message. Please try again or contact us directly:</p>
+                <p style="margin-top: 10px;"><i class="fa-solid fa-envelope"></i> rklogixtect@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91-87648-41243</p>
+            `;
+            
+            // Insert message after form
+            contactForm.parentNode.insertBefore(errorDiv, contactForm.nextSibling);
+            
+            // Auto remove after 8 seconds
+            setTimeout(() => {
+                errorDiv.style.opacity = '0';
+                setTimeout(() => {
+                    errorDiv.remove();
+                }, 500);
+            }, 8000);
+        }
+
+        // ==================== OTHER FUNCTIONALITIES ====================
+
+        // Header Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        let menuOpen = false;
+
+        if (hamburger) {
+            hamburger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menuOpen = !menuOpen;
+                menu.classList.toggle('active');
+                hamburger.innerHTML = menuOpen
+                    ? '<i class="fa-solid fa-xmark"></i>'
+                    : '<i class="fa-solid fa-bars"></i>';
+            });
+        }
+
+        // Sidebar Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.toggle('open');
+            });
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(e) {
+            if (sidebar && menuBtn && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+            
+            if (document.body.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+        }
+
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark');
+        }
+
+        // Active Menu Link
+        const currentPage = window.location.pathname.split('/').pop();
+        const menuLinks = document.querySelectorAll('.menu a');
+        
+        menuLinks.forEach(link => {
+            link.classList.remove('active');
+            const linkPage = link.getAttribute('href');
+            if (linkPage === currentPage || (currentPage === '' && linkPage === 'contact.html')) {
+                link.classList.add('active');
+            }
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                // Close other FAQs
+                document.querySelectorAll('.faq-answer').forEach(answer => {
+                    if (answer !== button.nextElementSibling && answer.classList.contains('active')) {
+                        answer.classList.remove('active');
+                        const otherIcon = answer.previousElementSibling.querySelector('i');
+                        if (otherIcon) {
+                            otherIcon.classList.remove('fa-chevron-up');
+                            otherIcon.classList.add('fa-chevron-down');
+                        }
+                    }
+                });
+                
+                // Toggle current FAQ
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                answer.classList.toggle('active');
+                if (icon) {
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                }
+            });
+        });
+
+        // Phone number click handler
+        document.querySelectorAll('.cta-phone a, .whatsapp-number, .fa-whatsapp').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const phoneNumber = this.textContent.trim() || '+918764841243';
+                if (confirm(`Call ${phoneNumber}?`)) {
+                    window.location.href = `tel:${phoneNumber}`;
+                }
+            });
+        });
+
+        // WhatsApp click handler
+        document.querySelectorAll('.fa-whatsapp, .whatsapp-number').forEach(icon => {
+            icon.parentElement.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('https://wa.me/918764841243?text=Hi%20Bungalow%20Makers,%20I%20visited%20your%20website%20and%20would%20like%20to%20inquire%20about%20your%20services.', '_blank');
+            });
+        });
+
+        // Form field validation
+        document.querySelectorAll('.form-group input, .form-group textarea, .form-group select').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.value.trim() !== '') {
+                    this.classList.add('filled');
+                } else {
+                    this.classList.remove('filled');
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.contact-info-item, .contact-form-section, .map-container, .faq-item, .three-box > div');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = "1";
+                    element.style.transform = "translateY(0)";
+                }
+            });
+        };
+
+        // Set initial state for animation
+        document.querySelectorAll('.contact-info-item, .contact-form-section, .map-container, .faq-item, .three-box > div').forEach(el => {
+            if (el) {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(20px)";
+                el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            }
+        });
+
+        // Run animation on load and scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Map hover effect
+        const mapContainer = document.querySelector('.map-container');
+        if (mapContainer) {
+            mapContainer.addEventListener('mouseenter', () => {
+                mapContainer.style.transform = 'scale(1.01)';
+                mapContainer.style.boxShadow = '0 20px 40px rgba(255,0,119,0.15)';
+            });
+            
+            mapContainer.addEventListener('mouseleave', () => {
+                mapContainer.style.transform = 'scale(1)';
+                mapContainer.style.boxShadow = 'var(--shadow)';
+            });
+        }
+
+        console.log('Contact page loaded with EmailJS integration. Email: rklogixtect@gmail.com | Phone: 87648-41243');
+    </script>
+
+    <!-- EmailJS Setup Instructions (Visible in Console) -->
+    <script>
+        console.log('%c🔴 EMAILJS SETUP REQUIRED:', 'font-size: 16px; font-weight: bold; color: #ff0077;');
+        console.log('%c1. Go to https://www.emailjs.com and sign up for free', 'font-size: 14px; color: #333;');
+        console.log('%c2. Create an Email Service (Gmail, Outlook, etc.)', 'font-size: 14px; color: #333;');
+        console.log('%c3. Create an Email Template with these variables:', 'font-size: 14px; color: #333;');
+        console.log('   {{to_email}}, {{from_name}}, {{from_email}}, {{phone}}, {{city}}, {{service}}, {{message}}, {{site_url}}');
+        console.log('%c4. Get your Public Key, Service ID, and Template ID', 'font-size: 14px; color: #333;');
+        console.log('%c5. Replace in the code:', 'font-size: 14px; color: #ff0077;');
+        console.log('   - "YOUR_EMAILJS_PUBLIC_KEY" with your Public Key');
+        console.log('   - "YOUR_SERVICE_ID" with your Service ID');
+        console.log('   - "YOUR_TEMPLATE_ID" with your Template ID');
+        console.log('%c✅ Target Email: rklogixtect@gmail.com', 'font-size: 14px; font-weight: bold; color: #4CAF50;');
+    </script>
+</body>
+</html>

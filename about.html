@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>About Us - Bungalow Makers | Architectural Excellence Since 2016</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ===== RESET & GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ===== VARIABLES ===== */
+        :root {
+            --bg: #f0f0f0;
+            --text: #111;
+            --hover: rgba(0, 0, 0, 0.05);
+            --primary: #ff0077;
+            --primary-light: #ff6cb0;
+            --red: #d32f2f;
+            --red-dark: #b71c1c;
+            --dark-blue: rgb(15, 72, 118);
+            --white: #ffffff;
+            --gray-light: #f9f9f9;
+            --gray: #555;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark {
+            --bg: #1f1f1f;
+            --text: #fff;
+            --hover: rgba(255, 255, 255, 0.1);
+            --white: #2d2d2d;
+            --gray-light: #3d3d3d;
+            --gray: #ddd;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            height: 80px;
+            background-color: aliceblue;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px 0 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        body.dark .header {
+            background-color: #2d2d2d;
+            color: white;
+        }
+
+        body.dark .menu li a {
+            color: white;
+        }
+
+        .logo img {
+            height: 60px;
+            transition: transform 0.4s ease;
+            display: block;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        /* ===== MENU BUTTON ===== */
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--primary);
+            background: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        body.dark .menu-btn {
+            background: #333;
+            color: var(--primary-light);
+            border-color: #555;
+        }
+
+        body.dark .menu-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== DESKTOP MENU ===== */
+        .menu ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s;
+            padding-bottom: 5px;
+        }
+
+        .menu li a:hover,
+        .menu li a.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .menu li i {
+            margin-right: 8px;
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: black;
+        }
+
+        body.dark .hamburger {
+            color: white;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar h2 {
+            color: var(--dark-blue);
+            margin: 20px 0 15px;
+            font-size: 20px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 8px;
+        }
+
+        body.dark .sidebar h2 {
+            color: var(--primary-light);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .item-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            transition: background 0.3s;
+        }
+
+        .item-link:hover {
+            background-color: var(--hover);
+        }
+
+        .item-left i {
+            width: 20px;
+            margin-right: 12px;
+            color: var(--primary);
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .item-left {
+            display: flex;
+            align-items: center;
+        }
+
+        /* ===== DARK MODE SWITCH ===== */
+        .label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .label:hover {
+            background-color: var(--hover);
+        }
+
+        .switch-box {
+            width: 42px;
+            height: 22px;
+            background: #ccc;
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .switch-circle {
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .switch-box {
+            background: #666;
+        }
+
+        body.dark .switch-circle {
+            left: 22px;
+        }
+
+        /* ===== ABOUT HERO SECTION ===== */
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://images.unsplash.com/photo-1487956382158-bb926046304a?w=1600&auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .about-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease;
+        }
+
+        .about-hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== ABOUT CONTAINER ===== */
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* ===== ABOUT STORY SECTION ===== */
+        .about-story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+            transition: transform 0.6s ease;
+            display: block;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--red);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--red);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        body.dark .about-text p {
+            color: #ddd;
+        }
+
+        /* ===== MISSION CARDS ===== */
+        .about-mission {
+            margin: 4rem 0;
+        }
+
+        .about-mission h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            color: var(--red);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .about-mission h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--red);
+        }
+
+        .mission-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .mission-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .mission-card i {
+            font-size: 3rem;
+            color: var(--red);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .mission-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .mission-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--red);
+        }
+
+        .mission-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        body.dark .mission-card p {
+            color: #ddd;
+        }
+
+        /* ===== TEAM SECTION ===== */
+        .team-section {
+            margin: 4rem 0;
+        }
+
+        .team-section h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            color: var(--red);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .team-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--red);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid var(--red);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover img {
+            transform: scale(1.05);
+        }
+
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .team-member p {
+            color: var(--red);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p:last-child {
+            color: var(--gray);
+            font-weight: normal;
+        }
+
+        .team-member i {
+            color: var(--red);
+            margin: 0 5px;
+            font-size: 1.2rem;
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats-section {
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            padding: 60px 20px;
+            color: white;
+            width: 100%;
+            border-radius: 50px;
+            margin: 65px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-9px);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* ===== WHY CHOOSE US ===== */
+        .why-choose {
+            margin: 4rem 0;
+        }
+
+        .why-choose h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            color: var(--red);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .why-choose h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--red);
+        }
+
+        .why-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .why-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--gray-light);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .why-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            background: var(--white);
+        }
+
+        .why-item i {
+            font-size: 2.5rem;
+            color: var(--red);
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .why-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .why-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .why-item p {
+            color: var(--gray);
+        }
+
+        /* ===== CTA SECTION ===== */
+        .about-cta {
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            color: white;
+            padding: 4rem;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            animation: shimmer 6s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .about-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .about-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--red);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid white;
+        }
+
+        .cta-button i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ===== CONTACT INFO BOXES ===== */
+        .three-box {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            text-align: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .location, .mail, .contact-three {
+            border: none;
+            border-radius: 10px;
+            padding: 30px 20px;
+            width: 280px;
+            transition: 0.4s all ease;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .location:hover, .mail:hover, .contact-three:hover {
+            cursor: pointer;
+            background: var(--red);
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .location:hover p, .mail:hover p, .contact-three:hover p {
+            color: white;
+        }
+
+        .circle {
+            margin-bottom: 20px;
+        }
+
+        .circle i {
+            font-size: 50px;
+            color: var(--red);
+            transition: all 0.3s ease;
+        }
+
+        .location:hover .circle i,
+        .mail:hover .circle i,
+        .contact-three:hover .circle i {
+            color: white;
+            transform: scale(1.2);
+        }
+
+        .three-box p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .three-box p strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark-blue);
+            padding: 50px 20px;
+            color: white;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            color: thistle;
+            margin-bottom: 30px;
+            border-bottom: 1px solid;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: thistle;
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 2;
+            transition: 0.2s all ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            font-weight: bold;
+            padding-left: 5px;
+        }
+
+        .footer-section i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .about-hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .mission-cards,
+            .team-grid,
+            .why-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 15px 0 70px;
+                height: 70px;
+            }
+
+            .menu-btn {
+                top: 15px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .logo img {
+                height: 45px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .menu {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background: aliceblue;
+                width: 100%;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                border-top: 2px solid #ddd;
+                z-index: 99;
+            }
+
+            body.dark .menu {
+                background: #2d2d2d;
+                border-top-color: #555;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu ul {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu li a {
+                display: block;
+                padding: 10px;
+            }
+
+            .about-hero {
+                height: 300px;
+                margin-top: 70px;
+                background-attachment: scroll;
+            }
+
+            .about-hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .about-hero-content p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .about-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .about-story {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-text h2 {
+                font-size: 2rem;
+                text-align: center;
+            }
+
+            .about-text h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .about-text {
+                text-align: center;
+            }
+
+            .mission-cards,
+            .team-grid,
+            .why-list {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .team-member img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .stats-section {
+                border-radius: 30px;
+                padding: 40px 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .stat-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
+                padding-bottom: 30px;
+            }
+
+            .stat-item:last-child {
+                border-bottom: none;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .about-cta {
+                padding: 3rem 1.5rem;
+            }
+
+            .about-cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-cta p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .three-box {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .location, .mail, .contact-three {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-section h3 {
+                display: block;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 10px 0 60px;
+                height: 60px;
+            }
+
+            .menu-btn {
+                top: 12px;
+                left: 12px;
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            .about-hero {
+                height: 250px;
+                margin-top: 60px;
+            }
+
+            .about-hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .about-hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .about-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .about-text h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-text p {
+                font-size: 1rem;
+            }
+
+            .mission-card,
+            .why-item {
+                padding: 1.5rem;
+            }
+
+            .team-member {
+                padding: 1.5rem;
+            }
+
+            .team-member img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 1rem;
+            }
+
+            .circle i {
+                font-size: 40px;
+            }
+
+            .three-box p strong {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Menu Button for Sidebar -->
+    <div class="menu-btn" id="menuBtn">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <!-- Sidebar Dashboard -->
+    <div class="sidebar" id="sidebar">
+        <h2><i class="fa-solid fa-chart-line"></i> Dashboard</h2>
+        <ul>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-user"></i>
+                        My Profile
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-bell"></i>
+                        Notifications
+                    </span>
+                    <span style="color: orange;">3</span>
+                </a>
+            </li>
+            <li>
+                <div class="label" id="darkModeToggle">
+                    <span class="item-left">
+                        <i class="fa-solid fa-moon"></i>
+                        Dark Mode
+                    </span>
+                    <div class="switch-box" id="modeSwitch">
+                        <div class="switch-circle"></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <h2><i class="fa-solid fa-toolbox"></i> More Tools</h2>
+        <ul>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-bookmark"></i>
+                        Bookmarked
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-language"></i>
+                        Language
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-circle-question"></i>
+                        Help & Support
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="home.html">
+                <img src="https://via.placeholder.com/200x60?text=BUNGALOW+MAKERS" alt="Bungalow Makers Logo">
+            </a>
+        </div>
+        <div id="hamburger" class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <nav id="menu" class="menu">
+            <ul>
+                 <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="#about"><i class="fa-solid fa-info-circle"></i> About</a></li>
+        <li><a href="service.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+        <li><a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a></li>
+        <li><a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <h1>About Bungalow Makers</h1>
+            <p><i class="fa-solid fa-calendar-check"></i> Leading architectural excellence since 2016</p>
+        </div>
+    </section>
+
+    <!-- Main About Content -->
+    <main class="about-container">
+        <!-- Our Story Section -->
+        <section class="about-story">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&auto=format&fit=crop&q=60"
+                    alt="Our Story">
+            </div>
+            <div class="about-text">
+                <h2><i class="fa-solid fa-book-open"></i> Our Story</h2>
+                <p>Founded in 2016, Bungalow Makers began with a simple vision: to transform the way people design and
+                    build their dream homes. What started as a small architectural firm in Udaipur has grown into one of
+                    India's most trusted home design companies.</p>
+                <p>With over 8+ years of experience, we've completed more than 7000+ projects across residential and
+                    commercial sectors. Our journey has been guided by innovation, client satisfaction, and
+                    architectural excellence.</p>
+                <p><i class="fa-solid fa-quote-left"></i> We believe every home tells a story, and we're here to help you write yours. <i class="fa-solid fa-quote-right"></i></p>
+            </div>
+        </section>
+
+        <!-- Mission & Vision Section -->
+        <section class="about-mission">
+            <h2><i class="fa-solid fa-bullseye"></i> Our Mission & Vision</h2>
+            <div class="mission-cards">
+                <div class="mission-card">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <h3>Mission</h3>
+                    <p>To provide innovative, sustainable, and client-centric architectural solutions that transform
+                        living spaces while maintaining the highest standards of quality and affordability.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fa-solid fa-eye"></i>
+                    <h3>Vision</h3>
+                    <p>To become India's most preferred architectural design firm, recognized for excellence in creating
+                        homes that inspire and communities that thrive.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fa-solid fa-handshake"></i>
+                    <h3>Values</h3>
+                    <p>Integrity, Innovation, Client Satisfaction, Sustainability, and Excellence in every project we
+                        undertake.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Team Section -->
+        <section class="team-section">
+            <h2><i class="fa-solid fa-users"></i> Meet Our Leadership</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=60"
+                        alt="Founder">
+                    <h3>Raj Sharma</h3>
+                    <p><i class="fa-solid fa-crown"></i> Founder & CEO</p>
+                    <p><i class="fa-solid fa-clock"></i> 15+ years experience</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=60"
+                        alt="Lead Architect">
+                    <h3>Priya Singh</h3>
+                    <p><i class="fa-solid fa-pen-ruler"></i> Lead Architect</p>
+                    <p><i class="fa-solid fa-compass-drafting"></i> Modern Designs</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&auto=format&fit=crop&q=60"
+                        alt="Interior Head">
+                    <h3>Amit Patel</h3>
+                    <p><i class="fa-solid fa-couch"></i> Interior Design Head</p>
+                    <p><i class="fa-solid fa-gem"></i> 10+ years in luxury interiors</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="stats-section">
+            <div class="container">
+                <h2 class="section-title" style="color: white; text-align: center; margin-bottom: 40px;">
+                    <i class="fa-solid fa-chart-simple"></i> Our Achievements
+                </h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">7000+</div>
+                        <div class="stat-label"><i class="fa-solid fa-building"></i> Projects Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">7000+</div>
+                        <div class="stat-label"><i class="fa-solid fa-heart"></i> Happy Clients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1500+</div>
+                        <div class="stat-label"><i class="fa-solid fa-store"></i> Commercial Projects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">35K+</div>
+                        <div class="stat-label"><i class="fa-solid fa-users"></i> Followers</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="why-choose">
+            <h2><i class="fa-solid fa-circle-question"></i> Why Choose Bungalow Makers?</h2>
+            <div class="why-list">
+                <div class="why-item">
+                    <i class="fa-solid fa-award"></i>
+                    <h3>8+ Years Experience</h3>
+                    <p>Proven track record in architectural design</p>
+                </div>
+                <div class="why-item">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                    <h3>Transparent Pricing</h3>
+                    <p>No hidden costs, complete budget clarity</p>
+                </div>
+                <div class="why-item">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>Client-Centric Approach</h3>
+                    <p>Your vision is our priority</p>
+                </div>
+                <div class="why-item">
+                    <i class="fa-solid fa-leaf"></i>
+                    <h3>Sustainable Designs</h3>
+                    <p>Eco-friendly and energy-efficient solutions</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="about-cta">
+            <h2><i class="fa-solid fa-house-chimney"></i> Ready to Build Your Dream Home?</h2>
+            <p>Let's discuss your vision and turn it into reality</p>
+            <a href="contact.html" class="cta-button">
+                Get Free Consultation <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </section>
+    </main>
+
+    <!-- Contact Info Boxes with Font Awesome Icons -->
+    <div class="three-box">
+        <div class="location">
+            <div class="circle">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <p><strong>Location</strong><br>Udaipur, <br>Rajasthan</p>
+        </div>
+
+        <div class="mail">
+            <div class="circle">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <p><strong>Mail</strong><br>Rajkumawatraz@gmail.com</p>
+        </div>
+
+        <div class="contact-three">
+            <div class="circle">
+                <i class="fa-solid fa-phone"></i>
+            </div>
+            <p><strong>Contact</strong><br>+91 87648 41243</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-house"></i> About Bungalow Makers</h3>
+                    <p>Bungalow Makers: Embark on a journey of excellence in Commercial and Residential 3D Elevation
+                        and Interior Designs. Read more...</p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-info-circle"></i> Information</h3>
+                    <p><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Us</a></p>
+                    <p><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Services</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> Design Gallery</a></p>
+                    <p><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Support</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-link"></i> Quick Links</h3>
+                    <p><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Floor Plans</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> 3D Exterior Design</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> Interior Design</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-address-card"></i> Contact Info</h3>
+                    <p><i class="fa-solid fa-phone"></i> +91-87648-41243</p>
+                    <p><i class="fa-solid fa-envelope"></i> Rajkumawatraz@gmail.com</p>
+                    <p><i class="fa-solid fa-map-pin"></i> Udaipur, Rajasthan</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== JAVASCRIPT ====================
+        
+        // ----- Header Mobile Menu Toggle -----
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menu.classList.toggle('active');
+            });
+        }
+
+        // ----- Sidebar Toggle -----
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.toggle('open');
+            });
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(e) {
+            if (sidebar && menuBtn && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+
+        // ----- Dark Mode Toggle -----
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+            
+            // Save preference to localStorage
+            if (document.body.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+        }
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark');
+        }
+
+        // ----- Active Menu Link -----
+        const currentPage = window.location.pathname.split('/').pop();
+        const menuLinks = document.querySelectorAll('.menu a');
+        
+        menuLinks.forEach(link => {
+            const linkPage = link.getAttribute('href');
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+        // ----- Stats Counter Animation -----
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(stat => {
+                const text = stat.innerText;
+                const value = parseInt(text.replace(/[^0-9]/g, ''));
+                const suffix = text.replace(/[0-9]/g, '');
+                
+                if (!isNaN(value)) {
+                    let start = 0;
+                    const increment = value / 50;
+                    const timer = setInterval(() => {
+                        start += increment;
+                        if (start < value) {
+                            stat.innerText = Math.floor(start) + suffix;
+                        } else {
+                            stat.innerText = value + suffix;
+                            clearInterval(timer);
+                        }
+                    }, 30);
+                }
+            });
+        }
+
+        // Run animation when stats section is in view
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateStats();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            observer.observe(statsSection);
+        }
+
+        // ----- Smooth Scroll for Anchor Links -----
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                if (href !== '#') {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

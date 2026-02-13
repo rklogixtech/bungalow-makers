@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Our Services - Bungalow Makers | Architectural & Interior Design</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ===== RESET & GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ===== VARIABLES ===== */
+        :root {
+            --bg: #f0f0f0;
+            --text: #111;
+            --hover: rgba(0, 0, 0, 0.05);
+            --primary: #ff0077;
+            --primary-light: #ff6cb0;
+            --red: #d32f2f;
+            --red-dark: #b71c1c;
+            --dark-blue: rgb(15, 72, 118);
+            --white: #ffffff;
+            --gray-light: #f9f9f9;
+            --gray: #555;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        body.dark {
+            --bg: #1f1f1f;
+            --text: #fff;
+            --hover: rgba(255, 255, 255, 0.1);
+            --white: #2d2d2d;
+            --gray-light: #3d3d3d;
+            --gray: #ddd;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            height: 80px;
+            background-color: aliceblue;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px 0 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        body.dark .header {
+            background-color: #2d2d2d;
+            color: white;
+        }
+
+        body.dark .menu li a {
+            color: white;
+        }
+
+        .logo img {
+            height: 60px;
+            transition: transform 0.4s ease;
+            display: block;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        /* ===== MENU BUTTON ===== */
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--primary);
+            background: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        body.dark .menu-btn {
+            background: #333;
+            color: var(--primary-light);
+            border-color: #555;
+        }
+
+        body.dark .menu-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== DESKTOP MENU ===== */
+        .menu ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s;
+            padding-bottom: 5px;
+        }
+
+        .menu li a:hover,
+        .menu li a.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .menu li i {
+            margin-right: 8px;
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: black;
+        }
+
+        body.dark .hamburger {
+            color: white;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar h2 {
+            color: var(--dark-blue);
+            margin: 20px 0 15px;
+            font-size: 20px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 8px;
+        }
+
+        body.dark .sidebar h2 {
+            color: var(--primary-light);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .item-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            transition: background 0.3s;
+        }
+
+        .item-link:hover {
+            background-color: var(--hover);
+        }
+
+        .item-left i {
+            width: 20px;
+            margin-right: 12px;
+            color: var(--primary);
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .item-left {
+            display: flex;
+            align-items: center;
+        }
+
+        /* ===== DARK MODE SWITCH ===== */
+        .label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .label:hover {
+            background-color: var(--hover);
+        }
+
+        .switch-box {
+            width: 42px;
+            height: 22px;
+            background: #ccc;
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .switch-circle {
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .switch-box {
+            background: #666;
+        }
+
+        body.dark .switch-circle {
+            left: 22px;
+        }
+
+        /* ===== SERVICES HERO SECTION ===== */
+        .services-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1487956382158-bb926046304a?w=1600&auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .services-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease;
+        }
+
+        .services-hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* ===== SECTION TITLES ===== */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--red);
+            margin-bottom: 3rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--red);
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        /* ===== SERVICES GRID ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* ===== SERVICE CARDS ===== */
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+            text-align: center;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: var(--gray);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        body.dark .service-card li {
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        .service-card li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .service-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: auto;
+            text-align: center;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            transition: all 0.3s;
+            align-self: center;
+        }
+
+        .service-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .service-link i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+
+        .service-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ===== BG LIGHT SECTION ===== */
+        .bg-light {
+            background: var(--gray-light);
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 4rem 0;
+        }
+
+        body.dark .bg-light {
+            background: #3d3d3d;
+        }
+
+        /* ===== PROCESS SECTION ===== */
+        .process-section {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            margin: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .process-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .process-section h2 i {
+            margin-right: 10px;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: white;
+            z-index: 1;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            padding: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: white;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: white;
+            border-color: white;
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .step p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* ===== PRICING SECTION ===== */
+        .pricing-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--white);
+            border-radius: 15px;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .pricing-section h2 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .pricing-section h2 i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            border: 2px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        body.dark .pricing-card {
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 0, 119, 0.2);
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.08);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .popular-badge i {
+            margin-right: 5px;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .price:before {
+            content: '₹';
+            font-size: 2rem;
+            align-self: flex-start;
+        }
+
+        .price:after {
+            content: '/project';
+            font-size: 1rem;
+            color: var(--gray);
+            align-self: flex-end;
+            font-weight: normal;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-card li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: var(--gray);
+            position: relative;
+            padding-left: 35px;
+        }
+
+        body.dark .pricing-card li {
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        .pricing-card li:before {
+            content: '✓';
+            position: absolute;
+            left: 10px;
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .pricing-card li.disabled {
+            color: #999;
+        }
+
+        .pricing-card li.disabled:before {
+            content: '✗';
+            color: #ff4444;
+        }
+
+        .pricing-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 1.5rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
+            width: 80%;
+        }
+
+        .pricing-btn:hover {
+            background: white;
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-btn i {
+            margin-left: 8px;
+        }
+
+        .price-note {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .services-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--red) 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-cta:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            animation: shimmer 6s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .services-cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-cta .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+            border: 2px solid white;
+        }
+
+        .services-cta .cta-button:hover {
+            background: transparent;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .services-cta .cta-button i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+
+        .services-cta .cta-button:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ===== CONTACT INFO BOXES ===== */
+        .three-box {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            text-align: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .location, .mail, .contact-three {
+            border: none;
+            border-radius: 10px;
+            padding: 30px 20px;
+            width: 280px;
+            transition: 0.4s all ease;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .location:hover, .mail:hover, .contact-three:hover {
+            cursor: pointer;
+            background: var(--primary);
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .location:hover p, .mail:hover p, .contact-three:hover p {
+            color: white;
+        }
+
+        .circle {
+            margin-bottom: 20px;
+        }
+
+        .circle i {
+            font-size: 50px;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .location:hover .circle i,
+        .mail:hover .circle i,
+        .contact-three:hover .circle i {
+            color: white;
+            transform: scale(1.2);
+        }
+
+        .three-box p {
+            color: var(--gray);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .three-box p strong {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .location:hover p strong,
+        .mail:hover p strong,
+        .contact-three:hover p strong {
+            color: white;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark-blue);
+            padding: 50px 20px;
+            color: white;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            color: thistle;
+            margin-bottom: 30px;
+            border-bottom: 1px solid;
+            display: inline-block;
+            padding-bottom: 5px;
+            font-size: 1.3rem;
+        }
+
+        .footer-section h3 i {
+            margin-right: 8px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: thistle;
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 2;
+            transition: 0.2s all ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            font-weight: bold;
+            padding-left: 5px;
+        }
+
+        .footer-section i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* ===== ACTIVE MENU ===== */
+        .menu li a.active {
+            color: var(--primary) !important;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .services-hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 15px 0 70px;
+                height: 70px;
+            }
+
+            .menu-btn {
+                top: 15px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .logo img {
+                height: 45px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .menu {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background: aliceblue;
+                width: 100%;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                border-top: 2px solid #ddd;
+                z-index: 99;
+            }
+
+            body.dark .menu {
+                background: #2d2d2d;
+                border-top-color: #555;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu ul {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu li a {
+                display: block;
+                padding: 10px;
+            }
+
+            .services-hero {
+                height: 300px;
+                margin-top: 70px;
+                background-attachment: scroll;
+            }
+
+            .services-hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .services-hero-content p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .services-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+            }
+
+            .pricing-card.popular:hover {
+                transform: translateY(-10px);
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .process-steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .step {
+                min-width: 100%;
+            }
+
+            .bg-light {
+                padding: 2rem 1rem;
+            }
+
+            .services-cta {
+                padding: 3rem 1.5rem;
+            }
+
+            .services-cta h2 {
+                font-size: 2rem;
+            }
+
+            .services-cta .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .three-box {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .location, .mail, .contact-three {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-section h3 {
+                display: block;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 10px 0 60px;
+                height: 60px;
+            }
+
+            .menu-btn {
+                top: 12px;
+                left: 12px;
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            .services-hero {
+                height: 250px;
+                margin-top: 60px;
+            }
+
+            .services-hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .services-hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .services-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .service-icon {
+                font-size: 2.5rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .pricing-card {
+                padding: 2rem 1rem;
+            }
+
+            .price {
+                font-size: 2.5rem;
+            }
+
+            .circle i {
+                font-size: 40px;
+            }
+
+            .three-box p {
+                font-size: 1rem;
+            }
+
+            .three-box p strong {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Button for Sidebar -->
+    <div class="menu-btn" id="menuBtn">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <!-- Sidebar Dashboard -->
+    <div class="sidebar" id="sidebar">
+        <h2><i class="fa-solid fa-chart-line"></i> Dashboard</h2>
+        <ul>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-user"></i>
+                        My Profile
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-bell"></i>
+                        Notifications
+                    </span>
+                    <span style="color: orange;">3</span>
+                </a>
+            </li>
+            <li>
+                <div class="label" id="darkModeToggle">
+                    <span class="item-left">
+                        <i class="fa-solid fa-moon"></i>
+                        Dark Mode
+                    </span>
+                    <div class="switch-box" id="modeSwitch">
+                        <div class="switch-circle"></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <h2><i class="fa-solid fa-toolbox"></i> More Tools</h2>
+        <ul>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-bookmark"></i>
+                        Bookmarked
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-language"></i>
+                        Language
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-circle-question"></i>
+                        Help & Support
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="home.html">
+                <img src="https://via.placeholder.com/200x60?text=BUNGALOW+MAKERS" alt="Bungalow Makers Logo">
+            </a>
+        </div>
+        <div id="hamburger" class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <nav id="menu" class="menu">
+            <ul>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-info-circle"></i> About</a></li>
+                <li><a href="#services" class="active"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+                <li><a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Services Hero Section -->
+    <section class="services-hero">
+        <div class="services-hero-content">
+            <h1><i class="fa-solid fa-briefcase"></i> Our Premium Services</h1>
+            <p>Comprehensive architectural and interior solutions under one roof</p>
+        </div>
+    </section>
+
+    <!-- Main Services Content -->
+    <main class="services-container">
+        <!-- Residential Design Services -->
+        <section class="services-section">
+            <h2 class="section-title"><i class="fa-solid fa-house-chimney"></i> Residential Design Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-house-user"></i>
+                    </div>
+                    <h3>Custom House Designs</h3>
+                    <p>Personalized house designs tailored to your lifestyle, preferences, and Vastu compliance.</p>
+                    <ul>
+                        <li>2D Floor Plans</li>
+                        <li>3D Elevation</li>
+                        <li>Structural Drawings</li>
+                        <li>Vastu Consultation</li>
+                    </ul>
+                    <a href="#" class="service-link">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3>3D Elevation Design</h3>
+                    <p>Photorealistic 3D exterior designs that visualize your dream home before construction.</p>
+                    <ul>
+                        <li>Modern Elevations</li>
+                        <li>Traditional Designs</li>
+                        <li>Ultra-Modern Concepts</li>
+                        <li>Kerala Style</li>
+                    </ul>
+                    <a href="#" class="service-link">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-couch"></i>
+                    </div>
+                    <h3>Interior Design</h3>
+                    <p>Complete interior solutions including furniture layout, material selection, and decor.</p>
+                    <ul>
+                        <li>Space Planning</li>
+                        <li>Material Selection</li>
+                        <li>Lighting Design</li>
+                        <li>Custom Furniture</li>
+                    </ul>
+                    <a href="#" class="service-link">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3>Landscape Design</h3>
+                    <p>Beautiful garden and outdoor space designs that complement your home architecture.</p>
+                    <ul>
+                        <li>Garden Planning</li>
+                        <li>Water Features</li>
+                        <li>Outdoor Lighting</li>
+                        <li>Hardscape Design</li>
+                    </ul>
+                    <a href="#" class="service-link">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commercial Design Services -->
+        <section class="services-section bg-light">
+            <h2 class="section-title"><i class="fa-solid fa-building"></i> Commercial Design Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-hotel"></i>
+                    </div>
+                    <h3>Hotel & Resort Design</h3>
+                    <p>Complete architectural and interior design solutions for hospitality projects.</p>
+                    <ul>
+                        <li>Lobby Design</li>
+                        <li>Guest Rooms</li>
+                        <li>Restaurant Planning</li>
+                        <li>Recreation Areas</li>
+                    </ul>
+                    <a href="#" class="service-link">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-hospital"></i>
+                    </div>
+                    <h3>Hospital Design</h3>
+                    <p>Healthcare facility planning with focus on functionality and patient comfort.</p>
+                    <ul>
+                        <li>Ward Planning</li>
+                        <li>OT Complexes</li>
+                        <li>OPD Design</li>
+                        <li>Emergency Services</li>
+                    </ul>
+                    <a href="#" class="service-link">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3>Commercial Complex</h3>
+                    <p>Shopping malls, retail spaces, and commercial building designs.</p>
+                    <ul>
+                        <li>Retail Layout</li>
+                        <li>Food Courts</li>
+                        <li>Parking Planning</li>
+                        <li>Facade Design</li>
+                    </ul>
+                    <a href="#" class="service-link">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+                    <h3>Educational Institutes</h3>
+                    <p>School, college, and training center designs with modern amenities.</p>
+                    <ul>
+                        <li>Classroom Design</li>
+                        <li>Labs & Libraries</li>
+                        <li>Auditorium</li>
+                        <li>Sports Facilities</li>
+                    </ul>
+                    <a href="#" class="service-link">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Process Section -->
+        <section class="process-section">
+            <h2><i class="fa-solid fa-diagram-project"></i> Our Design Process</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Consultation</h3>
+                    <p>Understanding your requirements, budget, and vision</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Concept Design</h3>
+                    <p>Creating initial sketches and 3D concepts</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Detailed Planning</h3>
+                    <p>Developing detailed drawings and plans</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Execution</h3>
+                    <p>Project implementation and quality control</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Handover</h3>
+                    <p>Final delivery and post-completion support</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section">
+            <h2><i class="fa-solid fa-tag"></i> Service Packages</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Basic Package</h3>
+                    <div class="price">50,000*</div>
+                    <ul>
+                        <li>2D Floor Plans</li>
+                        <li>Basic Elevation</li>
+                        <li>Structural Layout</li>
+                        <li>2 Revisions</li>
+                    </ul>
+                    <a href="contact.html" class="pricing-btn">Get Quote <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge"><i class="fa-solid fa-star"></i> Most Popular</div>
+                    <h3>Premium Package</h3>
+                    <div class="price">1,50,000*</div>
+                    <ul>
+                        <li>3D Exterior Design</li>
+                        <li>Complete Interior Design</li>
+                        <li>Working Drawings</li>
+                        <li>Site Visits (2)</li>
+                        <li>Unlimited Revisions</li>
+                    </ul>
+                    <a href="contact.html" class="pricing-btn">Get Quote <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Commercial Package</h3>
+                    <div class="price">Custom</div>
+                    <ul>
+                        <li>Complete Architectural Design</li>
+                        <li>MEP Planning</li>
+                        <li>Project Management</li>
+                        <li>Government Approval Support</li>
+                    </ul>
+                    <a href="contact.html" class="pricing-btn">Contact Us <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <p class="price-note">*Prices may vary based on project size and complexity</p>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="services-cta">
+            <h2><i class="fa-solid fa-circle-question"></i> Not Sure Which Service You Need?</h2>
+            <p>Our experts will guide you to the right solution</p>
+            <a href="contact.html" class="cta-button">
+                Book Free Consultation <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </section>
+    </main>
+
+    <!-- Contact Info Boxes with UPDATED DETAILS -->
+    <div class="three-box">
+        <div class="location">
+            <div class="circle">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <p><strong>Location</strong><br>Udaipur, Rajasthan</p>
+        </div>
+
+        <div class="mail">
+            <div class="circle">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <p><strong>Email</strong><br>rklogixtect@gmail.com</p>
+        </div>
+
+        <div class="contact-three">
+            <div class="circle">
+                <i class="fa-solid fa-phone"></i>
+            </div>
+            <p><strong>Contact</strong><br>
+                <i class="fa-solid fa-phone"></i> +91 87648 41243<br>
+                <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> +91 87648 41243
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer with UPDATED DETAILS -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-house"></i> About Bungalow Makers</h3>
+                    <p>Bungalow Makers: Embark on a journey of excellence in Commercial and Residential 3D Elevation and Interior Designs. Read more...</p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-info-circle"></i> Information</h3>
+                    <p><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Us</a></p>
+                    <p><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Services</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> Design Gallery</a></p>
+                    <p><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Support</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-link"></i> Quick Links</h3>
+                    <p><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Floor Plans</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> 3D Exterior Design</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> Interior Design</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-address-card"></i> Contact Info</h3>
+                    <p><i class="fa-solid fa-phone"></i> +91-87648-41243</p>
+                    <p><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> +91-87648-41243</p>
+                    <p><i class="fa-solid fa-envelope"></i> rklogixtect@gmail.com</p>
+                    <p><i class="fa-solid fa-map-pin"></i> Udaipur, Rajasthan</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== JAVASCRIPT ====================
+        
+        // ----- Header Mobile Menu Toggle -----
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menu.classList.toggle('active');
+            });
+        }
+
+        // ----- Sidebar Toggle -----
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.toggle('open');
+            });
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(e) {
+            if (sidebar && menuBtn && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+
+        // ----- Dark Mode Toggle -----
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+            
+            // Save preference to localStorage
+            if (document.body.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+        }
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark');
+        }
+
+        // ----- Active Menu Link -----
+        const currentPage = window.location.pathname.split('/').pop();
+        const menuLinks = document.querySelectorAll('.menu a');
+        
+        menuLinks.forEach(link => {
+            link.classList.remove('active');
+            const linkPage = link.getAttribute('href');
+            if (linkPage === currentPage || (currentPage === '' && linkPage === 'services.html')) {
+                link.classList.add('active');
+            }
+        });
+
+        // ----- Service Cards Animation on Scroll -----
+        const serviceCards = document.querySelectorAll('.service-card');
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        serviceCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // ----- Pricing Button Click Handler -----
+        document.querySelectorAll('.pricing-btn, .service-link, .cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                let packageName = '';
+                
+                if (this.classList.contains('pricing-btn')) {
+                    const card = this.closest('.pricing-card');
+                    if (card) {
+                        packageName = card.querySelector('h3').textContent;
+                        alert(`Thank you for your interest in our ${packageName}. Our team at rklogixtect@gmail.com will contact you shortly with a detailed quote.`);
+                    }
+                } else if (this.classList.contains('service-link')) {
+                    const card = this.closest('.service-card');
+                    if (card) {
+                        packageName = card.querySelector('h3').textContent;
+                        alert(`Thank you for your interest in ${packageName}. We'll send you our portfolio at rklogixtect@gmail.com`);
+                    }
+                } else if (this.classList.contains('cta-button')) {
+                    alert(`Thank you for your interest! We'll contact you within 24 hours.\nCall/WhatsApp: 87648-41243\nEmail: rklogixtect@gmail.com`);
+                }
+            });
+        });
+
+        // ----- Process Step Hover Effect -----
+        document.querySelectorAll('.step').forEach(step => {
+            step.addEventListener('mouseenter', function() {
+                const stepNumber = this.querySelector('.step-number');
+                stepNumber.style.transform = 'scale(1.1)';
+                stepNumber.style.background = 'var(--primary)';
+                stepNumber.style.color = 'white';
+            });
+            
+            step.addEventListener('mouseleave', function() {
+                const stepNumber = this.querySelector('.step-number');
+                stepNumber.style.transform = 'scale(1)';
+                stepNumber.style.background = 'white';
+                stepNumber.style.color = 'var(--primary)';
+            });
+        });
+
+        // ----- Smooth Scroll for Anchor Links -----
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                if (href !== '#') {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // ----- Add WhatsApp click handler -----
+        document.querySelectorAll('.fa-whatsapp').forEach(icon => {
+            icon.parentElement.addEventListener('click', function(e) {
+                if (this.href) return;
+                e.preventDefault();
+                window.open('https://wa.me/918764841243?text=Hi%20Bungalow%20Makers,%20I%20need%20a%20consultation%20for%20my%20project', '_blank');
+            });
+        });
+    </script>
+</body>
+</html>

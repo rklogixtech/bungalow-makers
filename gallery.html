@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Design Gallery - Bungalow Makers | Premium Architectural Designs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ===== RESET & GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ===== VARIABLES ===== */
+        :root {
+            --bg: #f0f0f0;
+            --text: #111;
+            --hover: rgba(0, 0, 0, 0.05);
+            --primary: #ff0077;
+            --primary-light: #ff6cb0;
+            --red: #d32f2f;
+            --red-dark: #b71c1c;
+            --dark-blue: rgb(15, 72, 118);
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray: #555;
+            --shadow: 0 20px 50px rgba(0,0,0,0.08);
+            --shadow-hover: 0 40px 80px rgba(255,0,119,0.15);
+        }
+
+        body.dark {
+            --bg: #1f1f1f;
+            --text: #fff;
+            --hover: rgba(255, 255, 255, 0.1);
+            --white: #2d2d2d;
+            --gray-light: #3d3d3d;
+            --gray: #ddd;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            height: 80px;
+            background-color: aliceblue;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px 0 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        body.dark .header {
+            background-color: #2d2d2d;
+            color: white;
+        }
+
+        body.dark .menu li a {
+            color: white;
+        }
+
+        .logo img {
+            height: 60px;
+            transition: transform 0.4s ease;
+            display: block;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        /* ===== MENU BUTTON ===== */
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--primary);
+            background: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        body.dark .menu-btn {
+            background: #333;
+            color: var(--primary-light);
+            border-color: #555;
+        }
+
+        body.dark .menu-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== DESKTOP MENU ===== */
+        .menu ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s;
+            padding-bottom: 5px;
+        }
+
+        .menu li a:hover,
+        .menu li a.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .menu li i {
+            margin-right: 8px;
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: black;
+        }
+
+        body.dark .hamburger {
+            color: white;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar h2 {
+            color: var(--dark-blue);
+            margin: 20px 0 15px;
+            font-size: 20px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 8px;
+        }
+
+        body.dark .sidebar h2 {
+            color: var(--primary-light);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .item-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            transition: background 0.3s;
+        }
+
+        .item-link:hover {
+            background-color: var(--hover);
+        }
+
+        .item-left i {
+            width: 20px;
+            margin-right: 12px;
+            color: var(--primary);
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .item-left {
+            display: flex;
+            align-items: center;
+        }
+
+        /* ===== DARK MODE SWITCH ===== */
+        .label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .label:hover {
+            background-color: var(--hover);
+        }
+
+        .switch-box {
+            width: 42px;
+            height: 22px;
+            background: #ccc;
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .switch-circle {
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .switch-box {
+            background: #666;
+        }
+
+        body.dark .switch-circle {
+            left: 22px;
+        }
+
+        /* ===== GALLERY HEADER ===== */
+        .gallery-header {
+            background: linear-gradient(135deg, #0f4876 0%, #1a1a2e 100%);
+            padding: 100px 0 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+        
+        .gallery-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M500,97C299,97,299,0,0,0v100h1000V0C701,0,701,97,500,97z" fill="%23ffffff"/></svg>');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: 100% 50px;
+        }
+        
+        .gallery-header h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .gallery-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+        
+        /* ===== FLOATING ICONS ===== */
+        .floating-icon {
+            position: absolute;
+            font-size: 30px;
+            color: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 30%; right: 15%; animation-delay: -1s; }
+        .floating-icon:nth-child(3) { bottom: 40%; left: 20%; animation-delay: -2s; }
+        .floating-icon:nth-child(4) { bottom: 30%; right: 10%; animation-delay: -3s; }
+        .floating-icon:nth-child(5) { top: 50%; left: 30%; animation-delay: -4s; }
+        .floating-icon:nth-child(6) { bottom: 20%; right: 25%; animation-delay: -5s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        /* ===== PREMIUM GALLERY ===== */
+        .premium-gallery {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* ===== FILTER SECTION ===== */
+        .modern-filters {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 100px;
+            z-index: 99;
+            backdrop-filter: blur(10px);
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tab-btn {
+            padding: 12px 28px;
+            border: 2px solid transparent;
+            background: var(--gray-light);
+            color: var(--gray);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tab-btn i {
+            font-size: 1.1rem;
+        }
+        
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), #ff4da6);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(255, 0, 119, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        /* ===== SEARCH BOX ===== */
+        .modern-search {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .modern-search input {
+            width: 100%;
+            padding: 18px 30px;
+            padding-right: 70px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: var(--gray-light);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .modern-search input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 10px 30px rgba(255, 0, 119, 0.15);
+        }
+        
+        .modern-search button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--primary), #ff4da6);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .modern-search button:hover {
+            transform: translateY(-50%) rotate(15deg) scale(1.1);
+            box-shadow: 0 10px 25px rgba(255, 0, 119, 0.4);
+        }
+        
+        /* ===== PREMIUM GRID ===== */
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+        
+        /* ===== PREMIUM CARD ===== */
+        .premium-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .premium-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(255, 0, 119, 0.2);
+        }
+        
+        /* ===== CARD IMAGE ===== */
+        .card-image {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .premium-card:hover .card-image img {
+            transform: scale(1.15);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .premium-card:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        /* ===== CARD BADGE ===== */
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary), #ff4da6);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(255, 0, 119, 0.3);
+        }
+        
+        /* ===== CARD CONTENT ===== */
+        .card-content {
+            padding: 25px;
+            position: relative;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .card-description {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        /* ===== CARD FEATURES ===== */
+        .card-features {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .feature i {
+            color: var(--primary);
+            font-size: 1rem;
+        }
+        
+        /* ===== CARD FOOTER ===== */
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        body.dark .card-footer {
+            border-top-color: rgba(255,255,255,0.1);
+        }
+        
+        .card-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .card-price span {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--gray-light);
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .action-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 0, 119, 0.3);
+        }
+        
+        /* ===== VIEW MORE BUTTON ===== */
+        .view-more {
+            text-align: center;
+            margin: 40px 0 60px;
+        }
+        
+        .view-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--primary), #ff4da6);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 35px rgba(255, 0, 119, 0.3);
+        }
+        
+        .view-more-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 0, 119, 0.4);
+            letter-spacing: 1px;
+        }
+        
+        /* ===== STATISTICS SECTION ===== */
+        .premium-stats {
+            background: linear-gradient(135deg, #0f4876 0%, #1a1a2e 100%);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 60px 0;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ff0077, #ff4da6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+        
+        /* ===== 3D SHOWCASE ===== */
+        .showcase-3d {
+            background: var(--gray-light);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .showcase-title {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .showcase-item {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .showcase-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 0, 119, 0.1);
+        }
+        
+        .showcase-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .showcase-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+        
+        .showcase-item p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* ===== LIGHTBOX MODAL ===== */
+        .premium-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .lightbox-container {
+            max-width: 1000px;
+            width: 100%;
+            background: var(--white);
+            border-radius: 30px;
+            overflow: hidden;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .lightbox-header {
+            background: linear-gradient(135deg, #0f4876 0%, #1a1a2e 100%);
+            padding: 30px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .lightbox-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            background: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        .lightbox-content img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .lightbox-details {
+            padding: 30px;
+        }
+        
+        .lightbox-details h4 {
+            font-size: 1.8rem;
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+        
+        .lightbox-details p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .download-btn:hover {
+            background: linear-gradient(135deg, var(--primary), #ff4da6);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 0, 119, 0.3);
+        }
+        
+        /* ===== CONTACT INFO BOXES ===== */
+        .three-box {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            text-align: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .location, .mail, .contact-three {
+            border: none;
+            border-radius: 10px;
+            padding: 30px 20px;
+            width: 280px;
+            transition: 0.4s all ease;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .location:hover, .mail:hover, .contact-three:hover {
+            cursor: pointer;
+            background: var(--primary);
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .location:hover p, .mail:hover p, .contact-three:hover p {
+            color: white;
+        }
+
+        .circle {
+            margin-bottom: 20px;
+        }
+
+        .circle i {
+            font-size: 50px;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .location:hover .circle i,
+        .mail:hover .circle i,
+        .contact-three:hover .circle i {
+            color: white;
+            transform: scale(1.2);
+        }
+
+        .three-box p {
+            color: var(--gray);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .three-box p strong {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .location:hover p strong,
+        .mail:hover p strong,
+        .contact-three:hover p strong {
+            color: white;
+        }
+
+        .whatsapp-icon {
+            color: #25D366;
+            margin-right: 5px;
+        }
+
+        .location:hover .whatsapp-icon,
+        .mail:hover .whatsapp-icon,
+        .contact-three:hover .whatsapp-icon {
+            color: white;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark-blue);
+            padding: 50px 20px;
+            color: white;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            color: thistle;
+            margin-bottom: 30px;
+            border-bottom: 1px solid;
+            display: inline-block;
+            padding-bottom: 5px;
+            font-size: 1.3rem;
+        }
+
+        .footer-section h3 i {
+            margin-right: 8px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: thistle;
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 2;
+            transition: 0.2s all ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            font-weight: bold;
+            padding-left: 5px;
+        }
+
+        .footer-section i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* ===== ANIMATION CLASSES ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1200px) {
+            .premium-grid {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .gallery-header h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 15px 0 70px;
+                height: 70px;
+            }
+
+            .menu-btn {
+                top: 15px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .logo img {
+                height: 45px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .menu {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background: aliceblue;
+                width: 100%;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                border-top: 2px solid #ddd;
+                z-index: 99;
+            }
+
+            body.dark .menu {
+                background: #2d2d2d;
+                border-top-color: #555;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu ul {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu li a {
+                display: block;
+                padding: 10px;
+            }
+
+            .gallery-header {
+                padding: 80px 0 40px;
+                margin-top: 70px;
+            }
+            
+            .gallery-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery-header p {
+                font-size: 1.1rem;
+                padding: 0 20px;
+            }
+            
+            .modern-filters {
+                position: static;
+                margin-top: 20px;
+                padding: 20px;
+            }
+            
+            .filter-tabs {
+                justify-content: center;
+            }
+            
+            .tab-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .premium-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .premium-card {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .showcase-title {
+                font-size: 2rem;
+            }
+            
+            .three-box {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .location, .mail, .contact-three {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-section h3 {
+                display: block;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 10px 0 60px;
+                height: 60px;
+            }
+
+            .menu-btn {
+                top: 12px;
+                left: 12px;
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            .gallery-header {
+                margin-top: 60px;
+                padding: 60px 0 30px;
+            }
+            
+            .gallery-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .gallery-header p {
+                font-size: 1rem;
+            }
+            
+            .floating-icon {
+                font-size: 20px;
+            }
+            
+            .tab-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+            
+            .modern-search input {
+                padding: 15px 25px;
+            }
+            
+            .modern-search button {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .card-features {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .card-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .card-actions {
+                align-self: flex-end;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .showcase-title {
+                font-size: 1.8rem;
+            }
+            
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .circle i {
+                font-size: 40px;
+            }
+            
+            .three-box p {
+                font-size: 1rem;
+            }
+            
+            .three-box p strong {
+                font-size: 1.1rem;
+            }
+            
+            .lightbox-container {
+                width: 95%;
+            }
+            
+            .lightbox-header h3 {
+                font-size: 1.2rem;
+            }
+            
+            .lightbox-content img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Button for Sidebar -->
+    <div class="menu-btn" id="menuBtn">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <!-- Sidebar Dashboard -->
+    <div class="sidebar" id="sidebar">
+        <h2><i class="fa-solid fa-chart-line"></i> Dashboard</h2>
+        <ul>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-user"></i>
+                        My Profile
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-bell"></i>
+                        Notifications
+                    </span>
+                    <span style="color: orange;">3</span>
+                </a>
+            </li>
+            <li>
+                <div class="label" id="darkModeToggle">
+                    <span class="item-left">
+                        <i class="fa-solid fa-moon"></i>
+                        Dark Mode
+                    </span>
+                    <div class="switch-box" id="modeSwitch">
+                        <div class="switch-circle"></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <h2><i class="fa-solid fa-toolbox"></i> More Tools</h2>
+        <ul>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-bookmark"></i>
+                        Bookmarked
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-language"></i>
+                        Language
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-circle-question"></i>
+                        Help & Support
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item-link">
+                    <span class="item-left">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="home.html">
+                <img src="https://via.placeholder.com/200x60?text=BUNGALOW+MAKERS" alt="Bungalow Makers Logo">
+            </a>
+        </div>
+        <div id="hamburger" class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <nav id="menu" class="menu">
+            <ul>
+        <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="about.html"><i class="fa-solid fa-info-circle"></i> About</a></li>
+        <li><a href="service.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+        <li><a href="#gallery"><i class="fa-solid fa-images"></i> Gallery</a></li>
+        <li><a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Premium Gallery Header -->
+    <section class="gallery-header">
+        <i class="floating-icon fa-solid fa-home"></i>
+        <i class="floating-icon fa-solid fa-building"></i>
+        <i class="floating-icon fa-solid fa-couch"></i>
+        <i class="floating-icon fa-solid fa-paint-roller"></i>
+        <i class="floating-icon fa-solid fa-tree"></i>
+        <i class="floating-icon fa-solid fa-water"></i>
+        
+        <h1><i class="fa-solid fa-images"></i> DESIGN GALLERY</h1>
+        <p>Explore our premium collection of architectural masterpieces, interior designs, and innovative concepts that transform spaces into living art.</p>
+    </section>
+
+    <!-- Premium Gallery Container -->
+    <main class="premium-gallery">
+        <!-- Modern Filters -->
+        <div class="modern-filters">
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-filter="all">
+                    <i class="fa-solid fa-layer-group"></i> All Designs
+                </button>
+                <button class="tab-btn" data-filter="modern">
+                    <i class="fa-solid fa-compass-drafting"></i> Modern
+                </button>
+                <button class="tab-btn" data-filter="villa">
+                    <i class="fa-solid fa-tree"></i> Villas
+                </button>
+                <button class="tab-btn" data-filter="interior">
+                    <i class="fa-solid fa-couch"></i> Interiors
+                </button>
+                <button class="tab-btn" data-filter="traditional">
+                    <i class="fa-solid fa-om"></i> Traditional
+                </button>
+                <button class="tab-btn" data-filter="commercial">
+                    <i class="fa-solid fa-building"></i> Commercial
+                </button>
+                <button class="tab-btn" data-filter="duplex">
+                    <i class="fa-solid fa-stairs"></i> Duplex
+                </button>
+            </div>
+            
+            <div class="modern-search">
+                <input type="text" id="searchDesigns" placeholder="Search designs by name or style...">
+                <button id="searchBtn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Premium Gallery Grid -->
+        <div class="premium-grid" id="galleryGrid">
+            <!-- Design 1 -->
+            <div class="premium-card fade-in delay-1" data-category="modern">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&auto=format&fit=crop&q=80" alt="Modern Villa">
+                    <div class="image-overlay"></div>
+                    <div class="card-badge"><i class="fa-solid fa-crown"></i> PREMIUM</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Contemporary Modern Villa</h3>
+                    <p class="card-description">Minimalist architectural masterpiece featuring floor-to-ceiling glass walls, sustainable materials, and intelligent home automation systems.</p>
+                    
+                    <div class="card-features">
+                        <div class="feature">
+                            <i class="fa-solid fa-ruler-combined"></i>
+                            <span>3500 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-bed"></i>
+                            <span>4 BHK</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-car"></i>
+                            <span>2 Parking</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-sun"></i>
+                            <span>Vastu Compliant</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="card-price">
+                            ₹28-35 Lakhs
+                            <span>Construction Cost</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="action-btn view-btn" data-id="1">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                            <button class="action-btn like-btn">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 2 -->
+            <div class="premium-card fade-in delay-2" data-category="villa">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=800&auto=format&fit=crop&q=80" alt="Luxury Villa">
+                    <div class="image-overlay"></div>
+                    <div class="card-badge"><i class="fa-solid fa-gem"></i> LUXURY</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Luxury Hillside Villa</h3>
+                    <p class="card-description">Exclusive hillside property with infinity pool, panoramic views, smart home features, and premium Italian marble finishes throughout.</p>
+                    
+                    <div class="card-features">
+                        <div class="feature">
+                            <i class="fa-solid fa-ruler-combined"></i>
+                            <span>4500 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-bed"></i>
+                            <span>5 BHK</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-water-ladder"></i>
+                            <span>Infinity Pool</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-tree"></i>
+                            <span>Landscaped Garden</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="card-price">
+                            ₹45-55 Lakhs
+                            <span>Construction Cost</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="action-btn view-btn" data-id="2">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                            <button class="action-btn like-btn">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 3 -->
+            <div class="premium-card fade-in delay-3" data-category="interior">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&auto=format&fit=crop&q=80" alt="Modern Interior">
+                    <div class="image-overlay"></div>
+                    <div class="card-badge"><i class="fa-solid fa-couch"></i> INTERIOR</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Contemporary Living Space</h3>
+                    <p class="card-description">Open-concept living area with custom Italian furniture, smart lighting system, acoustic treatment, and luxury fabric finishes.</p>
+                    
+                    <div class="card-features">
+                        <div class="feature">
+                            <i class="fa-solid fa-ruler-combined"></i>
+                            <span>800 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-palette"></i>
+                            <span>Custom Colors</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <span>Smart Lighting</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-couch"></i>
+                            <span>Premium Furniture</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="card-price">
+                            ₹12-18 Lakhs
+                            <span>Interior Cost</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="action-btn view-btn" data-id="3">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                            <button class="action-btn like-btn">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 4 -->
+            <div class="premium-card fade-in delay-4" data-category="traditional">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&fit=crop&q=80" alt="Traditional Haveli">
+                    <div class="image-overlay"></div>
+                    <div class="card-badge"><i class="fa-solid fa-om"></i> TRADITIONAL</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Rajasthani Haveli Design</h3>
+                    <p class="card-description">Authentic Rajasthani architecture with intricate jharokhas, central courtyard, traditional motifs, and heritage-style interiors.</p>
+                    
+                    <div class="card-features">
+                        <div class="feature">
+                            <i class="fa-solid fa-ruler-combined"></i>
+                            <span>3800 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-bed"></i>
+                            <span>6 BHK</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-fountain"></i>
+                            <span>Central Courtyard</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-om"></i>
+                            <span>Vastu Verified</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="card-price">
+                            ₹32-40 Lakhs
+                            <span>Construction Cost</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="action-btn view-btn" data-id="4">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                            <button class="action-btn like-btn">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 5 -->
+            <div class="premium-card fade-in delay-5" data-category="commercial">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&auto=format&fit=crop&q=80" alt="Office Building">
+                    <div class="image-overlay"></div>
+                    <div class="card-badge"><i class="fa-solid fa-building"></i> COMMERCIAL</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Corporate Office Tower</h3>
+                    <p class="card-description">Modern office complex with glass façade, energy-efficient systems, collaborative workspaces, and premium corporate facilities.</p>
+                    
+                    <div class="card-features">
+                        <div class="feature">
+                            <i class="fa-solid fa-ruler-combined"></i>
+                            <span>15000 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-building"></i>
+                            <span>5 Floors</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-elevator"></i>
+                            <span>2 Elevators</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-car"></i>
+                            <span>50 Parking</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="card-price">
+                            ₹1.2-1.8 Cr
+                            <span>Construction Cost</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="action-btn view-btn" data-id="5">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                            <button class="action-btn like-btn">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 6 -->
+            <div class="premium-card fade-in" data-category="duplex">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop&q=80" alt="Duplex House">
+                    <div class="image-overlay"></div>
+                    <div class="card-badge"><i class="fa-solid fa-stairs"></i> DUPLEX</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Modern Duplex Residence</h3>
+                    <p class="card-description">Two-story contemporary home with rooftop terrace, double-height living room, and seamless indoor-outdoor living spaces.</p>
+                    
+                    <div class="card-features">
+                        <div class="feature">
+                            <i class="fa-solid fa-ruler-combined"></i>
+                            <span>2800 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-bed"></i>
+                            <span>3 BHK</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-stairs"></i>
+                            <span>2 Floors</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-sun"></i>
+                            <span>Rooftop Terrace</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="card-price">
+                            ₹22-28 Lakhs
+                            <span>Construction Cost</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="action-btn view-btn" data-id="6">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                            <button class="action-btn like-btn">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View More Button -->
+        <div class="view-more">
+            <button class="view-more-btn" id="loadMoreBtn">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                Load More Designs
+                <i class="fa-solid fa-arrow-down"></i>
+            </button>
+        </div>
+
+        <!-- Premium Statistics -->
+        <section class="premium-stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">1500+</div>
+                    <div class="stat-label"><i class="fa-solid fa-pen-ruler"></i> Designs Created</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">7000+</div>
+                    <div class="stat-label"><i class="fa-solid fa-heart"></i> Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8+</div>
+                    <div class="stat-label"><i class="fa-solid fa-calendar"></i> Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label"><i class="fa-solid fa-star"></i> Client Satisfaction</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Showcase -->
+        <section class="showcase-3d">
+            <h2 class="showcase-title"><i class="fa-solid fa-cube"></i> Experience in 3D</h2>
+            <p style="color: var(--gray); font-size: 1.1rem;">Explore our designs in immersive 3D visualization before construction</p>
+            
+            <div class="showcase-grid">
+                <div class="showcase-item">
+                    <div class="showcase-icon">
+                        <i class="fa-solid fa-vr-cardboard"></i>
+                    </div>
+                    <h3>Virtual Walkthrough</h3>
+                    <p>Experience your future home in virtual reality before construction begins.</p>
+                </div>
+                
+                <div class="showcase-item">
+                    <div class="showcase-icon">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <h3>3D Models</h3>
+                    <p>Detailed 3D models for precise visualization and planning.</p>
+                </div>
+                
+                <div class="showcase-item">
+                    <div class="showcase-icon">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+                    <h3>Animation Tours</h3>
+                    <p>Cinematic animation tours showcasing every corner of your design.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Premium Lightbox Modal -->
+    <div class="premium-lightbox" id="lightboxModal">
+        <div class="lightbox-container">
+            <div class="lightbox-header">
+                <h3 id="lightboxTitle"><i class="fa-solid fa-image"></i> Design Details</h3>
+                <button class="lightbox-close" id="closeLightbox">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="lightbox-content">
+                <img id="lightboxImage" src="" alt="">
+                <div class="lightbox-details" id="lightboxDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Info Boxes with UPDATED DETAILS -->
+    <div class="three-box">
+        <div class="location">
+            <div class="circle">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <p><strong>Location</strong><br>Udaipur, Rajasthan</p>
+        </div>
+
+        <div class="mail">
+            <div class="circle">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <p><strong>Email</strong><br>rklogixtect@gmail.com</p>
+        </div>
+
+        <div class="contact-three">
+            <div class="circle">
+                <i class="fa-solid fa-phone"></i>
+            </div>
+            <p><strong>Contact</strong><br>
+                <i class="fa-solid fa-phone"></i> +91 87648 41243<br>
+                <i class="fa-brands fa-whatsapp whatsapp-icon"></i> +91 87648 41243
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer with UPDATED DETAILS -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-images"></i> Design Gallery</h3>
+                    <p>Explore our premium collection of architectural designs, interior concepts, and innovative spaces that transform dreams into reality.</p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-info-circle"></i> Information</h3>
+                    <p><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Us</a></p>
+                    <p><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Services</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> Design Gallery</a></p>
+                    <p><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Support</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-link"></i> Quick Links</h3>
+                    <p><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Floor Plans</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> 3D Exterior Design</a></p>
+                    <p><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> Interior Design</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fa-solid fa-address-card"></i> Contact Info</h3>
+                    <p><i class="fa-solid fa-phone"></i> +91-87648-41243</p>
+                    <p><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> +91-87648-41243</p>
+                    <p><i class="fa-solid fa-envelope"></i> rklogixtect@gmail.com</p>
+                    <p><i class="fa-solid fa-map-pin"></i> Udaipur, Rajasthan</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="color: thistle;">© 2024 Bungalow Makers. All rights reserved. | Designed with <i class="fa-solid fa-heart" style="color: #ff0077;"></i> in Udaipur</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== JAVASCRIPT ====================
+        
+        // ----- Header Mobile Menu Toggle -----
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        let menuOpen = false;
+
+        if (hamburger) {
+            hamburger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menuOpen = !menuOpen;
+                menu.classList.toggle('active');
+                hamburger.innerHTML = menuOpen
+                    ? '<i class="fa-solid fa-xmark"></i>'
+                    : '<i class="fa-solid fa-bars"></i>';
+            });
+        }
+
+        // ----- Sidebar Toggle -----
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.toggle('open');
+            });
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(e) {
+            if (sidebar && menuBtn && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+
+        // ----- Dark Mode Toggle -----
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+            
+            // Save preference to localStorage
+            if (document.body.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+        }
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark');
+        }
+
+        // ----- Active Menu Link -----
+        const currentPage = window.location.pathname.split('/').pop();
+        const menuLinks = document.querySelectorAll('.menu a');
+        
+        menuLinks.forEach(link => {
+            link.classList.remove('active');
+            const linkPage = link.getAttribute('href');
+            if (linkPage === currentPage || (currentPage === '' && linkPage === 'gallery.html')) {
+                link.classList.add('active');
+            }
+        });
+
+        // ----- Gallery Filter Tabs -----
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const premiumCards = document.querySelectorAll('.premium-card');
+        
+        if (tabButtons.length > 0) {
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active to clicked tab
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter cards with animation
+                    premiumCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0) scale(1)';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px) scale(0.95)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        }
+
+        // ----- Search Functionality -----
+        const searchInput = document.getElementById('searchDesigns');
+        const searchBtn = document.getElementById('searchBtn');
+        
+        function performSearch() {
+            if (!searchInput) return;
+            
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm) {
+                premiumCards.forEach(card => {
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const description = card.querySelector('.card-description').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0) scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px) scale(0.95)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            } else {
+                // Reset to show all
+                const allBtn = document.querySelector('.tab-btn[data-filter="all"]');
+                if (allBtn) allBtn.click();
+            }
+        }
+        
+        if (searchBtn) {
+            searchBtn.addEventListener('click', performSearch);
+        }
+        
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performSearch();
+            });
+        }
+
+        // ----- Lightbox Functionality -----
+        const lightboxModal = document.getElementById('lightboxModal');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxDetails = document.getElementById('lightboxDetails');
+        const closeLightbox = document.getElementById('closeLightbox');
+        const viewButtons = document.querySelectorAll('.view-btn');
+        
+        if (viewButtons.length > 0) {
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.premium-card');
+                    const imageSrc = card.querySelector('img').src;
+                    const title = card.querySelector('.card-title').textContent;
+                    const description = card.querySelector('.card-description').textContent;
+                    const features = card.querySelector('.card-features').innerHTML;
+                    const price = card.querySelector('.card-price').innerHTML;
+                    
+                    lightboxImage.src = imageSrc;
+                    lightboxTitle.innerHTML = `<i class="fa-solid fa-image"></i> ${title}`;
+                    
+                    lightboxDetails.innerHTML = `
+                        <h4>${title}</h4>
+                        <p>${description}</p>
+                        <div style="margin: 20px 0;">
+                            <div class="card-features">${features}</div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
+                            <div style="font-size: 1.5rem; color: #ff0077; font-weight: bold;">
+                                ${price}
+                            </div>
+                            <button class="download-btn" onclick="alert('Thank you for your interest! Our team at rklogixtect@gmail.com will send you the design details.')">
+                                <i class="fa-solid fa-download"></i> Download Design
+                            </button>
+                        </div>
+                        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+                            <p><i class="fa-solid fa-phone"></i> Call us: +91 87648 41243</p>
+                            <p><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> WhatsApp: +91 87648 41243</p>
+                        </div>
+                    `;
+                    
+                    lightboxModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+        }
+        
+        if (closeLightbox) {
+            closeLightbox.addEventListener('click', function() {
+                lightboxModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        }
+        
+        if (lightboxModal) {
+            lightboxModal.addEventListener('click', function(e) {
+                if (e.target === lightboxModal) {
+                    lightboxModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // ----- Like Button Functionality -----
+        const likeButtons = document.querySelectorAll('.like-btn');
+        
+        likeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                
+                if (icon.classList.contains('fa-regular')) {
+                    icon.classList.remove('fa-regular');
+                    icon.classList.add('fa-solid');
+                    icon.style.color = '#ff0077';
+                    
+                    // Animation
+                    this.style.transform = 'scale(1.3)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 300);
+                } else {
+                    icon.classList.remove('fa-solid');
+                    icon.classList.add('fa-regular');
+                    icon.style.color = '';
+                }
+            });
+        });
+
+        // ----- Share Button Functionality -----
+        const shareButtons = document.querySelectorAll('.share-btn');
+        
+        shareButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.premium-card');
+                const title = card.querySelector('.card-title').textContent;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: title,
+                        text: 'Check out this beautiful design from Bungalow Makers!',
+                        url: window.location.href
+                    });
+                } else {
+                    // Fallback for browsers that don't support Web Share API
+                    alert(`Share this design: ${title}\n\nContact us at rklogixtect@gmail.com or call 87648-41243 for more details.`);
+                }
+            });
+        });
+
+        // ----- Load More Button -----
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function() {
+                const spinner = this.querySelector('.fa-spinner');
+                const arrow = this.querySelector('.fa-arrow-down');
+                
+                // Show loading
+                this.style.opacity = '0.7';
+                this.disabled = true;
+                
+                // Simulate loading
+                setTimeout(() => {
+                    alert('📸 More designs will be available soon!\n\n📧 For exclusive design collections, email us at rklogixtect@gmail.com\n📞 Or call/WhatsApp: 87648-41243');
+                    
+                    // Reset button
+                    this.style.opacity = '1';
+                    this.disabled = false;
+                    
+                    // Arrow animation
+                    arrow.style.transform = 'rotate(180deg)';
+                    setTimeout(() => {
+                        arrow.style.transform = 'rotate(0deg)';
+                    }, 300);
+                }, 1500);
+            });
+        }
+
+        // ----- Animate elements on scroll -----
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fade-in:not(.animated)');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animated');
+                }
+            });
+        };
+        
+        // Initial animation
+        setTimeout(animateOnScroll, 100);
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // ----- WhatsApp Click Handler -----
+        document.querySelectorAll('.fa-whatsapp').forEach(icon => {
+            icon.parentElement.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('https://wa.me/918764841243?text=Hi%20Bungalow%20Makers,%20I%20saw%20your%20gallery%20and%20would%20like%20to%20know%20more%20about%20your%20designs.', '_blank');
+            });
+        });
+
+        // ----- Initialize animations -----
+        const animatedElements = document.querySelectorAll('.fade-in');
+        animatedElements.forEach(el => {
+            if (!el.classList.contains('animated')) {
+                setTimeout(() => {
+                    el.classList.add('animated');
+                }, 100);
+            }
+        });
+
+        console.log('Gallery page loaded successfully! Contact: rklogixtect@gmail.com');
+    </script>
+</body>
+</html>
